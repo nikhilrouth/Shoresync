@@ -1,0 +1,26 @@
+.footer {
+  position: fixed;
+  width:100%;
+  background-color: #ADD8E6; /* Light Blue background */
+  padding: 20px;
+  bottom: 0%;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.separator {
+  width: 1px;
+  height: 50px;
+  background-color: #333; /* Dark color for separator */
+}
+
+p {
+  color: #333; /* Dark text color */
+  margin: 0;
+  font-size: 1em;
+}

@@ -1,0 +1,15 @@
+.header {
+  background-color: #6fbad3; /* Light Blue background */
+  position: fixed;
+  top: 0;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+
+h1 {
+  color: #333; /* Dark text color */
+  margin: 0;
+  font-size: 2em;
+}

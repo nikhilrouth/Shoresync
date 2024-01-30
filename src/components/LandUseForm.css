@@ -1,0 +1,22 @@
+.form-container {
+  width:75%;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+
+.form-header {
+  background-color: #ADD8E6;
+  padding: 10px;
+  text-align: center;
+}
+
+.form-button {
+  background-color: #ADD8E6;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Add any additional styles for the form container, header, and button as needed */
