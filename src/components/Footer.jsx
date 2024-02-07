@@ -5,9 +5,11 @@ const Footer = () => {
   return (
     <div className="footer">
       <div className="footer-content">
-        <p>Center for Coastal Resources Management (CCRM)</p>
+        <a href="https://www.vims.edu/ccrm/" target="_blank">
+        Center for Coastal Resources Management (CCRM)</a>
         <div className="separator"></div>
-        <p>The Virginia Institute of Marine Science (VIMS)</p>
+        <a href="https://www.vims.edu/" target="_blank">
+        The Virginia Institute of Marine Science (VIMS)</a>
       </div>
     </div>
   );

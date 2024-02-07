@@ -35,6 +35,7 @@ const LandUseForm = () => {
     navigate("/BankAttributes")
 
   };
+      
 
   return (
     <div className="form-container">

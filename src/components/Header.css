@@ -1,5 +1,6 @@
 .header {
   background-color: #6fbad3; /* Light Blue background */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   position: fixed;
   top: 0;
   padding: 20px;
