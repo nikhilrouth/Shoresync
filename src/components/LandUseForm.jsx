@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import CheckboxItem from './CheckBoxItem';
 import './LandUseForm.css'; // Import the CSS file
+import { useNavigate } from "react-router-dom";
 
 const LandUseForm = () => {
+ 
+  let navigate = useNavigate(); 
+
   const [checkedItems, setCheckedItems] = useState({
     forest: false,
     scrubShrub: false,
@@ -28,6 +32,8 @@ const LandUseForm = () => {
   const handleContinueClick = () => {
     console.log('Checked Items:', checkedItems);
     // Add your logic here for what happens when the user clicks Continue
+    navigate("/BankAttributes")
+
   };
 
   return (
