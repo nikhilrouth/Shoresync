@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     // Set the initial value of formComponent when the component mounts
-    setFormComponent(0); // Set it to 1 or any other initial value as needed
+    setFormComponent(formComponent); // Set it to 1 or any other initial value as needed
   }, []); // Empty dependency array ensures this effect runs only once when the component mounts
 
   return (

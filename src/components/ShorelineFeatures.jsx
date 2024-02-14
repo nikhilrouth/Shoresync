@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MultiSelect } from "react-multi-select-component";
 import './ShorelineFeatures.css'; // Import the CSS file
 import { toast } from 'react-toastify';
@@ -61,11 +61,41 @@ const handleContinueClick = () => {
     // If no errors, proceed with logic
     if (!validations.some(validation => validation.condition)) {
       console.log('Selected Erosion Control Structures:', selectedErosionControlOptions);
+      sessionStorage.setItem('erosionStructers', JSON.stringify(selectedErosionControlOptions));
+
       console.log('Selected Recreational Structures:', selectedRecreactionalOptions);
+      sessionStorage.setItem('recreationalStructures', JSON.stringify(selectedRecreactionalOptions));
+
       console.log('Selected other:', selectedOtherOptions);
+      sessionStorage.setItem('otherOptions', JSON.stringify(selectedOtherOptions));
+
       // Add your logic here for what happens when the user clicks Continue
     }
   };
+
+  useEffect(() => {
+    if(sessionStorage.getItem('erosionStructers') !== null ){
+    var recieved = sessionStorage.getItem('erosionStructers');
+    var parsedRecieved = JSON.parse(recieved);
+    setSelectedErosionControlOptions(parsedRecieved);
+    }
+
+    if(sessionStorage.getItem('recreationalStructures') !== null ){
+    var recieved1 = sessionStorage.getItem('recreationalStructures');
+    var parsedRecieved1 = JSON.parse(recieved1);
+    setSelectedRecreactionalOptions(parsedRecieved1);
+
+    }
+
+    if(sessionStorage.getItem('otherOptions') !== null ){
+    var recieved2 = sessionStorage.getItem('otherOptions');
+    if(recieved2 !== null){
+    var parsedRecieved2 = JSON.parse(recieved2);
+    setSelectedOtherOptions(parsedRecieved2);
+    }
+    }
+   
+  },[]);  
 
 
 

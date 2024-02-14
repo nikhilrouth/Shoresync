@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import CheckboxItem from './CheckBoxItem';
+import React, { useEffect, useState } from 'react';
+import RadioButtonItem from './RatioButtonItem';
 import Header from './Header';
 import Footer from './Footer';
 import './BankAttributesForm.css'; // Import the CSS file
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const BankAttributesForm = (props) => {
     
       const handleCheckboxChange = (name) => {
         setHeightItems(name);
+        
       };
 
       const handleCheckboxChange1 = (name => {
@@ -34,6 +37,8 @@ const BankAttributesForm = (props) => {
       const handleCheckboxChange5 = (option) => {
             setSelected5(option);
     };
+
+
 
 
       //extra
@@ -85,17 +90,80 @@ const BankAttributesForm = (props) => {
           no: false,
     });
 
+    //Session Storage Beginning
+    useEffect(() => {
+      var item = sessionStorage.getItem('heightItem');
+      if(item != null){
+        handleCheckboxChange(item);
+      }
+
+      var item1 = sessionStorage.getItem('bankStability');
+      if(item1 != null){
+        handleCheckboxChange1(item1);
+      }
+
+      var item2 = sessionStorage.getItem('bankCover');
+      if(item2 != null){
+        handleCheckboxChange2(item2);
+      }
+
+      var item3 = sessionStorage.getItem('marshBuffer');
+      if(item3 != null){
+        handleCheckboxChange3(item3);
+      }
+
+      var item4 = sessionStorage.getItem('bankBuffer');
+      if(item4 != null){
+        handleCheckboxChange4(item4);
+      }
+
+      var item5 = sessionStorage.getItem('phragmitesAustralis');
+      if(item5 != null){
+        handleCheckboxChange5(item5);
+      }
+        
+    }, []);
+
 
       const handleContinueClick = () => {
+
+        // const validations = [
+        //   {
+        //     condition: heightItems.length === undefined || heightItems.length === 15,
+        //     message: 'Please select a Bank Height.'
+        //   },
+        // ];
+      
+        // validations.forEach(validation => {
+        //   if (validation.condition) {
+            
+        //     toast.error(validation.message,{});
+        //     console.log(validation.message);
+        //   }
+        // });
+
+        console.log('testing ', heightItems.length);
         console.log('Checked Bank Height Items:', heightItems);
+        sessionStorage.setItem('heightItem', heightItems);
+
         console.log('Checked Bank Stavility:', stabilityItems);
+        sessionStorage.setItem('bankStability', stabilityItems);
+
         console.log('Checked Bank Cover:', coverItems);
+        sessionStorage.setItem('bankCover', coverItems);
+
         console.log('Checked Marsh Buffer:', marshItems);
+        sessionStorage.setItem('marshBuffer', marshItems);
+
         console.log('Checked Beach Buffer:', beachItems);
+        sessionStorage.setItem('bankBuffer', beachItems);
+
         console.log('Checked Phragmites Australis:', selected5);
+        sessionStorage.setItem('phragmitesAustralis', selected5);
         // Add your logic here for what happens when the user clicks Continue
         props.setFormComponent(2);
       };
+      //Session Storage end
       
 return (
   <div>
@@ -106,7 +174,7 @@ return (
     <form>
     <h3 className="form-sub-header">Bank Height </h3>
         {Object.entries(height).map(([key, value]) => (
-          <CheckboxItem
+          <RadioButtonItem
             key={key}
             name={value}
             checked={heightItems === value}
@@ -116,17 +184,18 @@ return (
 
     <h3 className="form-sub-header">Bank Stability </h3>
         {Object.entries(stability).map(([key, value]) => (
-          <CheckboxItem
+          <RadioButtonItem
             key={key}
             name={value}
             checked={stabilityItems === value}
             onChange={handleCheckboxChange1}
+            
           />
         ))}
 
     <h3 className="form-sub-header">Bank Cover </h3>
         {Object.entries(cover).map(([key, value]) => (
-          <CheckboxItem
+          <RadioButtonItem
             key={key}
             name={value}
             checked={coverItems === value}
@@ -136,7 +205,7 @@ return (
 
     <h3 className="form-sub-header">Marsh Buffer </h3>
         {Object.entries(marsh).map(([key, value]) => (
-            <CheckboxItem
+            <RadioButtonItem
                 key={key}
                 name={value}
                 checked={marshItems === value}
@@ -146,7 +215,7 @@ return (
 
     <h3 className="form-sub-header">Beach Buffer </h3>
         {Object.entries(beach).map(([key, value]) => (
-            <CheckboxItem
+            <RadioButtonItem
                 key={key}
                 name={value}
                 checked={beachItems === value}
@@ -157,14 +226,13 @@ return (
     <h3 className="form-sub-header">Phragmites australis </h3>
 
         {Object.entries(phragmites).map(([key, value]) => (
-          <CheckboxItem
+          <RadioButtonItem
           key={key}
           name={value}
           checked={selected5 === value}
           onChange={handleCheckboxChange5}
         />
       ))}
-
 
         <button type="button" onClick={handleContinueClick} className="form-button">
           Continue

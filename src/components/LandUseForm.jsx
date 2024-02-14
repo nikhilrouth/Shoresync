@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CheckboxItem from './CheckBoxItem';
 import './LandUseForm.css'; // Import the CSS file
 
@@ -43,12 +43,23 @@ const LandUseForm = (props) => {
 
   const handleContinueClick = () => {
     console.log('Checked Items:', checkedItems);
+    sessionStorage.setItem('landUse', JSON.stringify(checkedItems));
     props.setFormComponent(1);
+    
     // Add your logic here for what happens when the user clicks Continue
     //navigate("/BankAttributes")
 
   };
-      
+
+  useEffect(() => {
+    if(sessionStorage.getItem('landUse') !== null ){
+    var recieved = sessionStorage.getItem('landUse');
+    var parsedRecieved = JSON.parse(recieved);
+    setCheckedItems(parsedRecieved);
+    }
+    
+   
+  },[]);   
 
   return (
     <div className="form-container">
