@@ -5,7 +5,7 @@ import Footer from './Footer';
 import './BankAttributesForm.css'; // Import the CSS file
 
 
-const BankAttributesForm = () => {
+const BankAttributesForm = (props) => {
     
       const handleCheckboxChange = (name) => {
         setHeightItems(name);
@@ -94,6 +94,7 @@ const BankAttributesForm = () => {
         console.log('Checked Beach Buffer:', beachItems);
         console.log('Checked Phragmites Australis:', selected5);
         // Add your logic here for what happens when the user clicks Continue
+        props.setFormComponent(2);
       };
       
 return (
