@@ -4,6 +4,9 @@ import { MultiSelect } from "react-multi-select-component";
 import './ShorelineFeatures.css'; // Import the CSS file
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Tooltip } from "../tooltip";
+import Data from "../Data.json"
+
 
 const erosionControlOptions = [
   { label: "Riprap (L)", value: "riprapL" },
@@ -145,13 +148,20 @@ const handleContinueClick = () => {
     setSelectedOtherOptions([])
 
   };
+  
 
 
   return (
+    
     <div className="form-container">
     <h2 className="form-header">Shoreline Features</h2>
     <form>
-      <h4>Erosion Control Structures</h4>
+      <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.erosionControl.lable_heading}
+      &nbsp;
+      <Tooltip text={Data.ShoreLineFeaturesData.erosionControl.tool_lable}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+      </h4>
       {/* <pre>{JSON.stringify(selectedErosionControlOptions)}</pre> */}
       <MultiSelect
         options={erosionControlOptions}
@@ -160,7 +170,13 @@ const handleContinueClick = () => {
         labelledBy="Select Erosion Control Structures"
       />
 
-      <h4>Recreactional Structures</h4>
+  
+      <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.recreational.lable_heading}
+      &nbsp;
+      <Tooltip text={Data.ShoreLineFeaturesData.recreational.tool_lable}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+      </h4>
       {/* <pre>{JSON.stringify(selectedRecreactionalOptions)}</pre> */}
       <MultiSelect
         options={recreactionalOptions}
@@ -169,7 +185,7 @@ const handleContinueClick = () => {
         labelledBy="Select Recreactional Structures"
       />
 
-       <h4>Other</h4>
+       <h4>{Data.ShoreLineFeaturesData.other.lable_heading}</h4>
        {/* <pre>{JSON.stringify(selectedOtherOptions)}</pre> */}
        <MultiSelect
         options={otherOptions}
