@@ -11,31 +11,41 @@ const BankAttributesForm = (props) => {
     
       const handleCheckboxChange = (name) => {
         setHeightItems(name);
-        
+        sessionStorage.setItem('heightItem', name);
+
+
       };
 
       const handleCheckboxChange1 = (name => {
-
         setStabilityItems(name);
+        sessionStorage.setItem('bankStability', name);
+
       })
 
       const handleCheckboxChange2 = (name => {
         setCoverItems(name);
+        sessionStorage.setItem('bankCover', name);
+        
 
       })
 
       const handleCheckboxChange3 = (name => {
-
         setMarshItems(name);
+        sessionStorage.setItem('marshBuffer', name);
+
       })
 
 
       const handleCheckboxChange4 = (name => {
         setBeachItems(name);
+        sessionStorage.setItem('bankBuffer', name);
+        
+
       })
 
       const handleCheckboxChange5 = (option) => {
             setSelected5(option);
+            sessionStorage.setItem('phragmitesAustralis', option);
     };
 
 
@@ -121,6 +131,8 @@ const BankAttributesForm = (props) => {
       if(item5 != null){
         handleCheckboxChange5(item5);
       }
+
+      sessionStorage.setItem('formComponent', 1);
         
     }, []);
 

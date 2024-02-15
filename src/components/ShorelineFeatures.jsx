@@ -33,12 +33,47 @@ const otherOptions = [
     { label: "Outfall (P)", value: "outfallP" },
 ]
 
-const ShorelineFeaturesForm = () => {
+const ShorelineFeaturesForm = (props) => {
   const [selectedErosionControlOptions, setSelectedErosionControlOptions] = useState([]);
   const [selectedRecreactionalOptions, setSelectedRecreactionalOptions] = useState([]);
   const [selectedOtherOptions, setSelectedOtherOptions] = useState([]);
   //const [error, setError] = useState('');
 
+  // const handleCheckboxChange = (name) => {
+  //   setCheckedItems((prevCheckedItems) => {
+  //     const updatedCheckedItems = {
+  //       ...prevCheckedItems,
+  //       [name]: !prevCheckedItems[name],
+  //     };
+
+
+  //     sessionStorage.setItem('landUse', JSON.stringify(updatedCheckedItems));
+  //     // console.log("Updated checked items:", updatedCheckedItems);
+  //     return updatedCheckedItems;
+  //   });
+
+    
+  // };
+
+  const handleCheckboxChange = (name) => {
+          setSelectedErosionControlOptions(name);
+          sessionStorage.setItem('erosionStructers', JSON.stringify(name));
+          // console.log("Updated checked items:", updatedCheckedItems);
+          // return updatedCheckedItems;
+        // });
+  }
+
+  const handleCheckboxChange1 = (name) => {
+    setSelectedRecreactionalOptions(name);
+    sessionStorage.setItem('recreationalStructures', JSON.stringify(name));
+
+  }
+
+  const handleCheckboxChange2 = (name) => {
+    setSelectedOtherOptions(name);
+    sessionStorage.setItem('otherOptions', JSON.stringify(name));
+
+}
 
 const handleContinueClick = () => {
     const validations = [
@@ -70,6 +105,8 @@ const handleContinueClick = () => {
       sessionStorage.setItem('otherOptions', JSON.stringify(selectedOtherOptions));
 
       // Add your logic here for what happens when the user clicks Continue
+
+      props.setFormComponent(3);
     }
   };
 
@@ -94,6 +131,8 @@ const handleContinueClick = () => {
     setSelectedOtherOptions(parsedRecieved2);
     }
     }
+
+    sessionStorage.setItem('formComponent', 2);
    
   },[]);  
 
@@ -117,7 +156,7 @@ const handleContinueClick = () => {
       <MultiSelect
         options={erosionControlOptions}
         value={selectedErosionControlOptions}
-        onChange={setSelectedErosionControlOptions}
+        onChange={handleCheckboxChange}
         labelledBy="Select Erosion Control Structures"
       />
 
@@ -126,7 +165,7 @@ const handleContinueClick = () => {
       <MultiSelect
         options={recreactionalOptions}
         value={selectedRecreactionalOptions}
-        onChange={setSelectedRecreactionalOptions}
+        onChange={handleCheckboxChange1}
         labelledBy="Select Recreactional Structures"
       />
 
@@ -135,7 +174,7 @@ const handleContinueClick = () => {
        <MultiSelect
         options={otherOptions}
         value={selectedOtherOptions}
-        onChange={setSelectedOtherOptions}
+        onChange={handleCheckboxChange2}
         labelledBy="Select Other"
         
         

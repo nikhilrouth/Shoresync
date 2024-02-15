@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CheckboxItem from './CheckBoxItem';
 import './FinalSubmitForm.css'; // Import the CSS file
 
@@ -31,6 +31,14 @@ const FinalSubmitForm = () => {
 //   };
 
 /// test adding
+
+
+
+useEffect(() => {
+
+  sessionStorage.setItem('formComponent', 3);
+
+});
 
   return (
     <div className="form-container">

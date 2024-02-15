@@ -19,12 +19,24 @@ const LandUseForm = (props) => {
     unknownLandUse: false,
   });
 
-  const handleCheckboxChange = (name) => {
-    setCheckedItems((prevCheckedItems) => ({
-      ...prevCheckedItems,
-      [name]: !prevCheckedItems[name],
-    }));
-  };
+
+    const handleCheckboxChange = (name) => {
+      setCheckedItems((prevCheckedItems) => {
+        const updatedCheckedItems = {
+          ...prevCheckedItems,
+          [name]: !prevCheckedItems[name],
+        };
+
+
+        sessionStorage.setItem('landUse', JSON.stringify(updatedCheckedItems));
+        // console.log("Updated checked items:", updatedCheckedItems);
+        return updatedCheckedItems;
+      });
+
+      
+    };
+
+
 
   const fetchUserData = () => {
     const requestOptions = {
@@ -44,6 +56,8 @@ const LandUseForm = (props) => {
   const handleContinueClick = () => {
     console.log('Checked Items:', checkedItems);
     sessionStorage.setItem('landUse', JSON.stringify(checkedItems));
+
+    
     props.setFormComponent(1);
     
     // Add your logic here for what happens when the user clicks Continue
@@ -56,7 +70,10 @@ const LandUseForm = (props) => {
     var recieved = sessionStorage.getItem('landUse');
     var parsedRecieved = JSON.parse(recieved);
     setCheckedItems(parsedRecieved);
+    
     }
+
+
     
    
   },[]);   
