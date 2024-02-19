@@ -36,6 +36,7 @@
     cursor: pointer;
     align-items: center;
     border-style:solid;
+    border-radius: 10px;
   }
 
   .upload-container {

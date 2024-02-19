@@ -110,6 +110,21 @@ const handleContinueClick = () => {
     }
   };
 
+  const handlePrevious = () => {
+    props.setFormComponent(1);
+  };
+
+
+  const handleReset = () => {
+    setSelectedErosionControlOptions([]);
+    setSelectedRecreactionalOptions([]);
+    setSelectedOtherOptions([]);
+
+    sessionStorage.removeItem('erosionStructers');
+    sessionStorage.removeItem('recreationalStructures');
+    sessionStorage.removeItem('otherOptions');
+  };
+
   useEffect(() => {
     if(sessionStorage.getItem('erosionStructers') !== null ){
     var recieved = sessionStorage.getItem('erosionStructers');
@@ -137,18 +152,8 @@ const handleContinueClick = () => {
   },[]);  
 
 
-
-
-  const handleReset = () => {
-    setSelectedErosionControlOptions([]);
-    setSelectedRecreactionalOptions([]);
-    setSelectedOtherOptions([])
-
-  };
-
-
   return (
-    <div className="form-container">
+    <div className="form-container" style={{paddingBottom: '60px'}}>
     <h2 className="form-header">Shoreline Features</h2>
     <form>
       <h4>Erosion Control Structures</h4>
@@ -183,6 +188,9 @@ const handleContinueClick = () => {
 
       <br></br>
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <button type="reset" onClick={handlePrevious} className="form-button">Previous</button>
+          &nbsp;
+          &nbsp;
         <button type="button"  onClick={handleContinueClick} className="form-button">
           Continue
         </button>

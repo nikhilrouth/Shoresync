@@ -10,6 +10,7 @@ import FinalSubmitForm from './components/FinalSubmitForm'
 function App() {
 
   const [formComponent, setFormComponent] = useState(0);
+  const [allFormsData, setAllFormsData] = useState({});
 
   useEffect(() => {
     // Set the initial value of formComponent when the component mounts
@@ -26,10 +27,10 @@ function App() {
   return (
     <div className='page'>
       <Header /> 
-      {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} />}
-      {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent}/>}
-      {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent}/>}
-      {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent}/>}
+      {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData} />}
+      {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
+      {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
+      {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
 
       {/* <LandUseForm /> */}
       <Footer/>
