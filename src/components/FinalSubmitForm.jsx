@@ -2,37 +2,18 @@ import React, { useEffect, useState } from 'react';
 import CheckboxItem from './CheckBoxItem';
 import './FinalSubmitForm.css'; // Import the CSS file
 
-const FinalSubmitForm = () => {
-//   const [checkedItems, setCheckedItems] = useState({
-//     forest: false,
-//     scrubShrub: false,
-//     grass: false,
-//     agriculture: false,
-//     residential: false,
-//     commercial: false,
-//     industrial: false,
-//     marshIsland: false,
-//     bareLot: false,
-//     timberedClearCuts: false,
-//     pavedAreas: false,
-//     unknownLandUse: false,
-//   });
+const FinalSubmitForm = (props) => {
+const handleSubmitClick = () => {
+  alert('Form Submitted');
+};
 
-//   const handleCheckboxChange = (name) => {
-//     setCheckedItems((prevCheckedItems) => ({
-//       ...prevCheckedItems,
-//       [name]: !prevCheckedItems[name],
-//     }));
-//   };
+const handleReset = () => {
+  alert('Reset Clicked');
+};
 
-//   const handleContinueClick = () => {
-//     console.log('Checked Items:', checkedItems);
-//     // Add your logic here for what happens when the user clicks Continue
-//   };
-
-/// test adding
-
-
+const handlePrevious = () => {
+  props.setFormComponent(2);
+}
 
 useEffect(() => {
 
@@ -53,9 +34,23 @@ useEffect(() => {
             </button>
         </div>
         <div>
-            <button type="button" className="form-button2">
+
+            {/* <button type="button" className="form-button2">
+            Submit Final Data
+            </button> */}
+            <button type="reset" onClick={handlePrevious} className="form-button">Previous</button>
+            &nbsp;
+            &nbsp;
+            <button type="reset" onClick={handleReset} className="form-button">Reset</button>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button type="button"  onClick={handleSubmitClick} className="form-button2">
             Submit Final Data
             </button>
+            
+            
         </div>
         
 
