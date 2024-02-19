@@ -156,7 +156,7 @@ const handleContinueClick = () => {
     sessionStorage.setItem('formComponent', 2);
    
   },[]);  
-  
+
 
 
 
