@@ -153,16 +153,6 @@ const handleContinueClick = () => {
     sessionStorage.setItem('formComponent', 2);
    
   },[]);  
-
-
-
-
-  const handleReset = () => {
-    setSelectedErosionControlOptions([]);
-    setSelectedRecreactionalOptions([]);
-    setSelectedOtherOptions([])
-
-  };
   
 
 

@@ -100,7 +100,7 @@ const LandUseForm = (props) => {
 
 
   return (
-    <div className="form-container" style={{paddingBottom: '60px'}}>
+    <div className="form-container" style={{paddingBottom: '80px'}}>
       <h2 className="form-header">Check the corresponding riparian land use classes</h2>
       <form>
         {Object.entries(checkedItems).map(([key, value]) => (
