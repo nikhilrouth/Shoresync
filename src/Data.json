@@ -1,0 +1,37 @@
+{
+  "ShoreLineFeaturesData":{
+    "erosionControl": {
+      "lable_heading": "Erosion Control Structures",
+      "tool_lable": "Structures added to the shoreline by property owners are recorded as a combination of points or lines. These features include defense structures, such as riprap, constructed to protect the shoreline from erosion;",
+      "options": {
+        "riprap": "Riprap is a type of rock or other material used to armor shorelines, streambeds, bridge abutments, pilings, and other shoreline structures against scour and water or ice erosion.",
+        "seawalls": "Seawalls are structures built parallel to the shoreline to prevent erosion from waves and currents."
+      }
+    },
+    "recreational": {
+      "lable_heading": "Recreactional Structures",
+      "tool_lable": "Recreactional Structures use description",
+      "options": {
+        "option1": "Tooltip for option 1",
+        "option2": "Tooltip for option 2"
+      }
+    },
+    "other": {
+      "lable_heading": "Other"
+    }
+  },
+  "LandUseData": {
+    "forest": "Forest land use description...",
+    "scrubShrub": "Scrub Shrub land use description...",
+    "grass": "Grass land use description...",
+    "agriculture": "Agriculture land use description...",
+    "residential": "Residential land use description...",
+    "commercial": "Commercial land use description...",
+    "industrial": "Industrial land use description...",
+    "marshIsland": "Marsh Island land use description...",
+    "bareLot": "Bare Lot land use description...",
+    "timberedClearCuts": "Timbered Clear Cuts land use description...",
+    "pavedAreas": "Paved Areas land use description...",
+    "unknownLandUse": "Unknown Land Use land use description..."
+  }
+}

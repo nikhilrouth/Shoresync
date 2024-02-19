@@ -23,11 +23,11 @@ useEffect(() => {
 
   return (
     <div className="form-container">
-        <p className="form-text">Click here to Synchronize GPS location</p>
+        <h3 className="form-text">Click here to Synchronize GPS location</h3>
         <button type="button" className="form-button">
         Synchronize GPS
         </button>
-        <p className="form-text">Click here to Process Data Files</p>
+        <h3 className="form-text">Click here to Process Data Files</h3>
         <div>
             <button type="button" className="form-button">
             Process Data Forms

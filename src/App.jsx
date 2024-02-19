@@ -6,6 +6,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import BankAttributesForm from './components/BankAttributesForm';
 import FinalSubmitForm from './components/FinalSubmitForm'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Images from './images/hero.jpeg'
+
 
 function App() {
 
@@ -40,3 +44,4 @@ function App() {
 
 
 export default App;
+
