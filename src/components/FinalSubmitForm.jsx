@@ -34,21 +34,32 @@ useEffect(() => {
 
   return (
     <div className="form-container">
-        <h3 className="form-text">Click here to Synchronize GPS location</h3>
+        <h4 className="form-text">Click here to Synchronize GPS location</h4>
         <button type="button" className="form-button">
         Synchronize GPS
         </button>
-        <h3 className="form-text">Click here to Process Data Files</h3>
+        <h4 className="form-text">Click here to Process Data Files</h4>
         <div>
             <button type="button" className="form-button">
             Process Data Forms
             </button>
         </div>
         <div className="upload-container">
-        <p className="form-text">Click here to Upload Images</p>
-        <label htmlFor="file-upload" className="upload-button">
+        <h4 className="form-text">Click here to Upload Images</h4>
+        
+    
+        {/* <label htmlFor="file-upload" className="upload-button">
         Upload Images
-        </label>
+        </label> */}
+
+        <button className="upload-button">
+          <label htmlFor="file-upload">
+            Upload Images
+            <input id="file-upload" type="file" multiple onChange={handleFileChange} style={{ display: 'none' }} />
+          </label>
+        </button>
+        
+        
           {/* Input element for file upload */}
           <input id="file-upload" type="file" multiple onChange={handleFileChange} style={{ display: 'none' }} />
             {/* Render selected files */}

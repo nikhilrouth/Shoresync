@@ -89,6 +89,13 @@ const handleContinueClick = () => {
       console.log('Selected other:', selectedOtherOptions);
       sessionStorage.setItem('otherOptions', JSON.stringify(selectedOtherOptions));
 
+      // Use a callback function in setAllFormsData to log the updated value
+      props.setAllFormsData(prevData => {
+        const updatedData = { ...prevData, ShorelineFeaturesData: {selectedErosionControlOptions, selectedRecreactionalOptions, selectedOtherOptions} };
+        console.log("All Forms Data:", updatedData);
+        return updatedData;
+      });
+
       // Add your logic here for what happens when the user clicks Continue
 
       props.setFormComponent(3);
