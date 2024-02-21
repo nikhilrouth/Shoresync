@@ -100,6 +100,54 @@ const BankAttributesForm = (props) => {
           no: false,
     });
 
+    const handleReset = () => {
+      setHeightItems({
+        "0 - 5ft": false,
+        "5 - 10ft": false,
+        "10 - 30ft": false,
+        "> 30ft": false,
+      });
+
+      setStabilityItems({
+        stable: false,
+        transitional: false,
+        unstable: false,
+        undercut: false,
+      });
+
+      setCoverItems({
+        bare: false,
+        partial: false,
+        total: false,
+      });
+
+      setMarshItems({
+        yes: false,
+        no: false,
+      });
+
+      setBeachItems({
+        yes: false,
+        no: false,
+      });
+
+      setSelected5({
+        yes: false,
+        no: false,
+      });
+
+      sessionStorage.removeItem('heightItem');
+      sessionStorage.removeItem('bankStability');
+      sessionStorage.removeItem('bankCover');
+      sessionStorage.removeItem('marshBuffer');
+      sessionStorage.removeItem('bankBuffer');
+      sessionStorage.removeItem('phragmitesAustralis');
+    };
+
+    const handlePrevious = () => {
+      props.setFormComponent(0);
+    };
+  
     //Session Storage Beginning
     useEffect(() => {
       var item = sessionStorage.getItem('heightItem');
@@ -180,7 +228,7 @@ const BankAttributesForm = (props) => {
 return (
   <div>
 <Header/>
-<div className="form-container">
+<div className="form-container" style={{paddingBottom: '100px'}}>
 <h2 className="form-header">Check the corresponding bank attribute features</h2>
     
     <form>
@@ -246,9 +294,21 @@ return (
         />
       ))}
 
-        <button type="button" onClick={handleContinueClick} className="form-button">
+        {/* <button type="button" onClick={handleContinueClick} className="form-button">
           Continue
-        </button>
+        </button> */}
+
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <button type="reset" onClick={handlePrevious} className="form-button">Previous</button>
+          &nbsp;
+          &nbsp;
+          <button type="button"  onClick={handleContinueClick} className="form-button">
+            Continue
+          </button>
+          &nbsp;
+          &nbsp;
+          <button type="reset" onClick={handleReset} className="form-button">Reset</button>
+      </div>
       </form>
 
 
