@@ -41,30 +41,11 @@ const ShorelineFeaturesForm = (props) => {
   const [selectedErosionControlOptions, setSelectedErosionControlOptions] = useState([]);
   const [selectedRecreactionalOptions, setSelectedRecreactionalOptions] = useState([]);
   const [selectedOtherOptions, setSelectedOtherOptions] = useState([]);
-  //const [error, setError] = useState('');
 
-  // const handleCheckboxChange = (name) => {
-  //   setCheckedItems((prevCheckedItems) => {
-  //     const updatedCheckedItems = {
-  //       ...prevCheckedItems,
-  //       [name]: !prevCheckedItems[name],
-  //     };
-
-
-  //     sessionStorage.setItem('landUse', JSON.stringify(updatedCheckedItems));
-  //     // console.log("Updated checked items:", updatedCheckedItems);
-  //     return updatedCheckedItems;
-  //   });
-
-    
-  // };
 
   const handleCheckboxChange = (name) => {
           setSelectedErosionControlOptions(name);
           sessionStorage.setItem('erosionStructers', JSON.stringify(name));
-          // console.log("Updated checked items:", updatedCheckedItems);
-          // return updatedCheckedItems;
-        // });
   }
 
   const handleCheckboxChange1 = (name) => {
@@ -173,12 +154,6 @@ const handleContinueClick = () => {
         <span class="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
       </h4>
-      <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.erosionControl.lable_heading}
-      &nbsp;
-      <Tooltip text={Data.ShoreLineFeaturesData.erosionControl.tool_lable}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
-      </Tooltip>
-      </h4>
       {/* <pre>{JSON.stringify(selectedErosionControlOptions)}</pre> */}
       <MultiSelect
         options={erosionControlOptions}
@@ -186,14 +161,6 @@ const handleContinueClick = () => {
         onChange={handleCheckboxChange}
         labelledBy="Select Erosion Control Structures"
       />
-
-  
-      <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.recreational.lable_heading}
-      &nbsp;
-      <Tooltip text={Data.ShoreLineFeaturesData.recreational.tool_lable}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
-      </Tooltip>
-      </h4>
   
       <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.recreational.lable_heading}
       &nbsp;
