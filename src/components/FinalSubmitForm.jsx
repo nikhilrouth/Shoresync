@@ -2,36 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CheckboxItem from './CheckBoxItem';
 import './FinalSubmitForm.css'; // Import the CSS file
 
-const FinalSubmitForm = () => {
-  //   const [checkedItems, setCheckedItems] = useState({
-//     forest: false,
-//     scrubShrub: false,
-//     grass: false,
-//     agriculture: false,
-//     residential: false,
-//     commercial: false,
-//     industrial: false,
-//     marshIsland: false,
-//     bareLot: false,
-//     timberedClearCuts: false,
-//     pavedAreas: false,
-//     unknownLandUse: false,
-//   });
-
-//   const handleCheckboxChange = (name) => {
-//     setCheckedItems((prevCheckedItems) => ({
-//       ...prevCheckedItems,
-//       [name]: !prevCheckedItems[name],
-//     }));
-//   };
-
-//   const handleContinueClick = () => {
-//     console.log('Checked Items:', checkedItems);
-//     // Add your logic here for what happens when the user clicks Continue
-//   };
-
-/// test adding
-
+const FinalSubmitForm = (props) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const handleFileChange = (event) => {
@@ -41,6 +12,20 @@ const FinalSubmitForm = () => {
     setSelectedFiles(files.filter(file => file.type === 'image/jpeg' || file.type === 'image/png'));
   }
 
+
+const handleSubmitClick = () => {
+  alert('Form Submitted');
+};
+
+const handleReset = () => {
+  alert('Reset Clicked');
+};
+
+const handlePrevious = () => {
+  props.setFormComponent(2);
+}
+
+
 useEffect(() => {
 
   sessionStorage.setItem('formComponent', 3);
@@ -49,11 +34,11 @@ useEffect(() => {
 
   return (
     <div className="form-container">
-        <p className="form-text">Click here to Synchronize GPS location</p>
+        <h3 className="form-text">Click here to Synchronize GPS location</h3>
         <button type="button" className="form-button">
         Synchronize GPS
         </button>
-        <p className="form-text">Click here to Process Data Files</p>
+        <h3 className="form-text">Click here to Process Data Files</h3>
         <div>
             <button type="button" className="form-button">
             Process Data Forms
@@ -80,8 +65,23 @@ useEffect(() => {
         <div>
           
             <button type="button" className="form-button2">
+
+            {/* <button type="button" className="form-button2">
+            Submit Final Data
+            </button> */}
+            <button type="reset" onClick={handlePrevious} className="form-button">Previous</button>
+            &nbsp;
+            &nbsp;
+            <button type="reset" onClick={handleReset} className="form-button">Reset</button>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <button type="button"  onClick={handleSubmitClick} className="form-button2">
             Submit Final Data
             </button>
+            
+            
         </div>
         
 
