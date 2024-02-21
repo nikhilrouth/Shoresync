@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import CheckboxItem from './CheckBoxItem';
 import './LandUseForm.css'; // Import the CSS file
-import landUseData from '../app-static-data/appdata';
+import {landUseData} from '../app-static-data/appdata';
 
 const LandUseForm = (props) => {
 

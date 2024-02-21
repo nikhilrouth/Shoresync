@@ -3,8 +3,10 @@ import RadioButtonItem from './RatioButtonItem';
 import Header from './Header';
 import Footer from './Footer';
 import './BankAttributesForm.css'; // Import the CSS file
-import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {overallData} from '../app-static-data/appdata';
+import { Tooltip } from "../tooltip";
+import Data from "../Data.json"
 
 
 const BankAttributesForm = (props) => {
@@ -48,57 +50,28 @@ const BankAttributesForm = (props) => {
             sessionStorage.setItem('phragmitesAustralis', option);
     };
 
-
-
-
       //extra
 
+      //Number one
       const height = ["0 - 5ft","5 - 10ft", "10 - 30ft", "> 30ft" ]
-      const [heightItems, setHeightItems] = useState({
-        "0 - 5ft": false,
-        "5 - 10ft": false,
-        "10 - 30ft": false,
-        "> 30ft": false,
-    
-      });
+      const [heightItems, setHeightItems] = useState(overallData.height);
 
 
       const stability = ["stable", "transitional", "unstable", "undercut"];
-      const [stabilityItems, setStabilityItems] = useState({
-        stable: false,
-        transitional: false,
-        unstable: false,
-        undercut: false,
-
-      });
+      const [stabilityItems, setStabilityItems] = useState(overallData.stability);
 
 
       const cover = ["bare", "partial","total"];
-      const [coverItems, setCoverItems] = useState({
-        bare: false,
-        partial: false,
-        total: false,
-      });
+      const [coverItems, setCoverItems] = useState(overallData.cover);
 
       const marsh = ["yes", "no"];
-      const [marshItems, setMarshItems] = useState({
-        yes: false,
-        no: false,
-    
-      });
+      const [marshItems, setMarshItems] = useState(overallData.marsh);
 
       const beach = ["yes", "no"];
-      const [beachItems, setBeachItems] = useState({
-        yes: false,
-        no: false,
-    
-      });
+      const [beachItems, setBeachItems] = useState(overallData.beach);
 
       const phragmites = ["yes", "no"];
-      const [selected5, setSelected5] = useState({
-          yes: false,
-          no: false,
-    });
+      const [selected5, setSelected5] = useState(overallData.phragmites);
 
     const handleReset = () => {
       setHeightItems({
@@ -187,22 +160,16 @@ const BankAttributesForm = (props) => {
 
       const handleContinueClick = () => {
 
-        // const validations = [
-        //   {
-        //     condition: heightItems.length === undefined || heightItems.length === 15,
-        //     message: 'Please select a Bank Height.'
-        //   },
-        // ];
-      
-        // validations.forEach(validation => {
-        //   if (validation.condition) {
-            
-        //     toast.error(validation.message,{});
-        //     console.log(validation.message);
-        //   }
-        // });
+        //Check here for number 3.. see if anything has been selected
+        var item = sessionStorage.getItem('heightItem');
+        var item1 = sessionStorage.getItem('bankStability');
+        var item2 = sessionStorage.getItem('bankCover');
+        var item3 = sessionStorage.getItem('marshBuffer');
+        var item4 = sessionStorage.getItem('bankBuffer');
+        var item5 = sessionStorage.getItem('phragmitesAustralis');
 
-        console.log('testing ', heightItems.length);
+        if(item !==null && item1 !==null && item2 !==null && item3 !==null && item4 !==null && item5 !==null){
+
         console.log('Checked Bank Height Items:', heightItems);
         sessionStorage.setItem('heightItem', heightItems);
 
@@ -220,10 +187,23 @@ const BankAttributesForm = (props) => {
 
         console.log('Checked Phragmites Australis:', selected5);
         sessionStorage.setItem('phragmitesAustralis', selected5);
+
         // Add your logic here for what happens when the user clicks Continue
+        
+        props.setAllFormsData(prevData => {
+          const updatedData = { ...prevData, heightItem: heightItems, stabilityItem: stabilityItems, 
+            coverItem: coverItems, marshItem: marshItems, beachItem: beachItems, phragmitesAustralis: selected5};
+          console.log("All Forms Data:", updatedData);
+          return updatedData;
+        });
+
+        //Next Screen
         props.setFormComponent(2);
+
+        } else {
+          alert("Select a choice for every attribute!");
+        }
       };
-      //Session Storage end
       
 return (
   <div>
@@ -232,7 +212,13 @@ return (
 <h2 className="form-header">Check the corresponding bank attribute features</h2>
     
     <form>
-    <h3 className="form-sub-header">Bank Height </h3>
+    <h3 className="form-sub-header">Bank Height 
+       &nbsp;
+      <Tooltip text={Data.BankAttributesData.heightItems}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+      </h3>
+    
         {Object.entries(height).map(([key, value]) => (
           <RadioButtonItem
             key={key}
@@ -242,7 +228,12 @@ return (
           />
         ))}
 
-    <h3 className="form-sub-header">Bank Stability </h3>
+    <h3 className="form-sub-header">Bank Stability 
+    &nbsp;
+      <Tooltip text={Data.BankAttributesData.stabilityItems}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+    </h3>
         {Object.entries(stability).map(([key, value]) => (
           <RadioButtonItem
             key={key}
@@ -253,7 +244,12 @@ return (
           />
         ))}
 
-    <h3 className="form-sub-header">Bank Cover </h3>
+    <h3 className="form-sub-header">Bank Cover 
+    &nbsp;
+      <Tooltip text={Data.BankAttributesData.coverItems}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+    </h3>
         {Object.entries(cover).map(([key, value]) => (
           <RadioButtonItem
             key={key}
@@ -263,7 +259,12 @@ return (
           />
         ))}
 
-    <h3 className="form-sub-header">Marsh Buffer </h3>
+    <h3 className="form-sub-header">Marsh Buffer 
+    &nbsp;
+      <Tooltip text={Data.BankAttributesData.marshItems}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+      </h3>
         {Object.entries(marsh).map(([key, value]) => (
             <RadioButtonItem
                 key={key}
@@ -273,7 +274,12 @@ return (
             />
             ))}
 
-    <h3 className="form-sub-header">Beach Buffer </h3>
+    <h3 className="form-sub-header">Beach Buffer 
+    &nbsp;
+      <Tooltip text={Data.BankAttributesData.beachItems}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+    </h3>
         {Object.entries(beach).map(([key, value]) => (
             <RadioButtonItem
                 key={key}
@@ -283,7 +289,12 @@ return (
             />
             ))}
 
-    <h3 className="form-sub-header">Phragmites australis </h3>
+    <h3 className="form-sub-header">Phragmites australis 
+    &nbsp;
+      <Tooltip text={Data.BankAttributesData.pharagamitesItems}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+    </h3>
 
         {Object.entries(phragmites).map(([key, value]) => (
           <RadioButtonItem
@@ -293,10 +304,6 @@ return (
           onChange={handleCheckboxChange5}
         />
       ))}
-
-        {/* <button type="button" onClick={handleContinueClick} className="form-button">
-          Continue
-        </button> */}
 
       <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <button type="reset" onClick={handlePrevious} className="form-button">Previous</button>

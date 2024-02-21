@@ -33,5 +33,15 @@
     "timberedClearCuts": "Timbered Clear Cuts land use description...",
     "pavedAreas": "Paved Areas land use description...",
     "unknownLandUse": "Unknown Land Use land use description..."
+  },
+
+  "BankAttributesData": {
+    "heightItems": "Bank Height Description...",
+    "stabilityItems": "Bank Stability Description...",
+    "coverItems": "Bank Cover Description...",
+    "marshItems": "Marsh Buffer Description...",
+    "beachItems": "Bank Buffer Description...",
+    "pharagamitesItems": "Pharagamites Australis Description..."
+
   }
 }
