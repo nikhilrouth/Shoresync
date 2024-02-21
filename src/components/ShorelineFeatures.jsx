@@ -7,6 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from "../tooltip";
 import Data from "../Data.json"
 
+import { Tooltip } from "../tooltip";
+import Data from "../Data.json"
+
 
 const erosionControlOptions = [
   { label: "Riprap (L)", value: "riprapL" },
@@ -156,11 +159,27 @@ const handleContinueClick = () => {
   
 
 
+
+  const handleReset = () => {
+    setSelectedErosionControlOptions([]);
+    setSelectedRecreactionalOptions([]);
+    setSelectedOtherOptions([])
+
+  };
+  
+
+
   return (
     
     <div className="form-container" style={{paddingBottom: '60px'}}>
     <h2 className="form-header">Shoreline Features</h2>
     <form>
+      <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.erosionControl.lable_heading}
+      &nbsp;
+      <Tooltip text={Data.ShoreLineFeaturesData.erosionControl.tool_lable}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+      </h4>
       <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.erosionControl.lable_heading}
       &nbsp;
       <Tooltip text={Data.ShoreLineFeaturesData.erosionControl.tool_lable}>
@@ -175,6 +194,13 @@ const handleContinueClick = () => {
         labelledBy="Select Erosion Control Structures"
       />
 
+  
+      <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.recreational.lable_heading}
+      &nbsp;
+      <Tooltip text={Data.ShoreLineFeaturesData.recreational.tool_lable}>
+        <span class="material-symbols-outlined small-info-icon" >info</span>
+      </Tooltip>
+      </h4>
   
       <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.recreational.lable_heading}
       &nbsp;
