@@ -10,9 +10,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Images from './images/hero.jpeg'
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Images from './images/hero.jpeg'
 
 
 function App() {
@@ -37,10 +34,10 @@ function App() {
     <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%' }}>
       <Header />
       <br></br> 
-      {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} />}
-      {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent}/>}
-      {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent}/>}
-      {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent}/>}
+      {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData} />}
+      {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
+      {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
+      {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
       
       <ToastContainer />
       <br></br>

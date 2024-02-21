@@ -7,8 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Tooltip } from "../tooltip";
 import Data from "../Data.json"
 
-import { Tooltip } from "../tooltip";
-import Data from "../Data.json"
 
 
 const erosionControlOptions = [
@@ -160,12 +158,7 @@ const handleContinueClick = () => {
 
 
 
-  const handleReset = () => {
-    setSelectedErosionControlOptions([]);
-    setSelectedRecreactionalOptions([]);
-    setSelectedOtherOptions([])
 
-  };
   
 
 

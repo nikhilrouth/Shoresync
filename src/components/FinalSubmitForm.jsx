@@ -45,7 +45,7 @@ useEffect(() => {
             </button>
         </div>
         <div>
-            <button type="button" className="form-button2">
+            {/* <button type="button" className="form-button2"> */}
 
             {/* <button type="button" className="form-button2">
             Submit Final Data
