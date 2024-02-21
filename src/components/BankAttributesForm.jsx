@@ -215,7 +215,7 @@ return (
     <h3 className="form-sub-header">Bank Height 
        &nbsp;
       <Tooltip text={Data.BankAttributesData.heightItems}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
+        <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
       </h3>
     
@@ -231,7 +231,7 @@ return (
     <h3 className="form-sub-header">Bank Stability 
     &nbsp;
       <Tooltip text={Data.BankAttributesData.stabilityItems}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
+        <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
     </h3>
         {Object.entries(stability).map(([key, value]) => (
@@ -247,7 +247,7 @@ return (
     <h3 className="form-sub-header">Bank Cover 
     &nbsp;
       <Tooltip text={Data.BankAttributesData.coverItems}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
+        <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
     </h3>
         {Object.entries(cover).map(([key, value]) => (
@@ -262,7 +262,7 @@ return (
     <h3 className="form-sub-header">Marsh Buffer 
     &nbsp;
       <Tooltip text={Data.BankAttributesData.marshItems}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
+        <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
       </h3>
         {Object.entries(marsh).map(([key, value]) => (
@@ -277,7 +277,7 @@ return (
     <h3 className="form-sub-header">Beach Buffer 
     &nbsp;
       <Tooltip text={Data.BankAttributesData.beachItems}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
+        <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
     </h3>
         {Object.entries(beach).map(([key, value]) => (
@@ -292,7 +292,7 @@ return (
     <h3 className="form-sub-header">Phragmites australis 
     &nbsp;
       <Tooltip text={Data.BankAttributesData.pharagamitesItems}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
+        <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
     </h3>
 
