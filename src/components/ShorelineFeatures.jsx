@@ -151,7 +151,7 @@ const handleContinueClick = () => {
       <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.erosionControl.lable_heading}
       &nbsp;
       <Tooltip text={Data.ShoreLineFeaturesData.erosionControl.tool_lable}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
+        <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
       </h4>
       {/* <pre>{JSON.stringify(selectedErosionControlOptions)}</pre> */}
@@ -165,7 +165,7 @@ const handleContinueClick = () => {
       <h4 className="tooltip-display">{Data.ShoreLineFeaturesData.recreational.lable_heading}
       &nbsp;
       <Tooltip text={Data.ShoreLineFeaturesData.recreational.tool_lable}>
-        <span class="material-symbols-outlined small-info-icon" >info</span>
+        <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
       </h4>
       {/* <pre>{JSON.stringify(selectedRecreactionalOptions)}</pre> */}
