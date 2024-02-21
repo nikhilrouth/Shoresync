@@ -1,5 +1,7 @@
 import React from 'react';
 import './CheckBoxItem.css'; // Import the CSS file
+import { Tooltip } from "../tooltip";
+import Data from "../Data.json"
 
 const CheckboxItem = ({ name, checked, onChange }) => {
   return (
@@ -12,6 +14,12 @@ const CheckboxItem = ({ name, checked, onChange }) => {
         />
         {name}
       </label>
+      &nbsp;
+      {Data.LandUseData[name] && (
+        <Tooltip text={Data.LandUseData[name]}>
+          <span className="material-symbols-outlined small-info-icon">info</span>
+        </Tooltip>
+      )}
     </div>
   );
 };

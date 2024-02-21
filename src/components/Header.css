@@ -6,6 +6,7 @@
   padding: 20px;
   width: 100%;
   text-align: center;
+  z-index: 1;
 }
 
 
@@ -13,4 +14,12 @@ h1 {
   color: #333; /* Dark text color */
   margin: 0;
   font-size: 2em;
+}
+
+.logo {
+  margin-right: 20px; /* Adjust spacing between logo and text */
+}
+
+.logo img {
+  max-height: 50px; /* Adjust logo height */
 }
