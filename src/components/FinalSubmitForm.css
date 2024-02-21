@@ -14,7 +14,7 @@
     text-align: center;
   }
   .form-text {
-    padding: 5px;
+    padding: 10px;
     margin-top: 0em;
     margin-bottom:0em;
     font-size: 20px;
@@ -42,6 +42,42 @@
     border-color: #ADD8E6;
     width: 150px;
     cursor: pointer;
+    align-items: center;
+    border-style:solid;
+  }
+
+  .upload-container {
+    margin-top: 20px;
+  }
+  
+  .upload-button {
+    background-color: #ADD8E6;
+    color: #000;
+    margin-top : 10em;
+    margin-bottom:10em;
+    padding: 10px 15px;
+    border: 1px solid #000;
+    cursor: pointer;
+  }
+  
+  .uploaded-files {
+    margin-top: 10px;
+  }
+  
+  .uploaded-file {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .thumbnail {
+    display: block;
+    width: 100px; /* Set a fixed width */
+    height: 50px; /* Let the height adjust proportionally */
+    margin-right: 10px; /* Add some spacing between thumbnails */
   }
 
   .form-button2:hover {
