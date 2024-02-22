@@ -191,8 +191,8 @@ const BankAttributesForm = (props) => {
         // Add your logic here for what happens when the user clicks Continue
         
         props.setAllFormsData(prevData => {
-          const updatedData = { ...prevData, heightItem: heightItems, stabilityItem: stabilityItems, 
-            coverItem: coverItems, marshItem: marshItems, beachItem: beachItems, phragmitesAustralis: selected5};
+          const updatedData = { ...prevData, BankAttributesData: {heightItem: heightItems, stabilityItem: stabilityItems, 
+            coverItem: coverItems, marshItem: marshItems, beachItem: beachItems, phragmitesAustralis: selected5}};
           console.log("All Forms Data:", updatedData);
           return updatedData;
         });
