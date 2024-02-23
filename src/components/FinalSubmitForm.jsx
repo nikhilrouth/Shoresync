@@ -23,6 +23,7 @@ const handleReset = () => {
 
 const handlePrevious = () => {
   props.setFormComponent(2);
+  sessionStorage.setItem('formComponent', 2);
 }
 
 

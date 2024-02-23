@@ -104,6 +104,7 @@ const handleContinueClick = () => {
 
   const handlePrevious = () => {
     props.setFormComponent(1);
+    sessionStorage.setItem('formComponent', 1);
   };
 
 
