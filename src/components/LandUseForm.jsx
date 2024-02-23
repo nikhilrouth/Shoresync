@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import CheckboxItem from './CheckBoxItem';
 import './LandUseForm.css'; // Import the CSS file
-import {landUseData} from '../app-static-data/appdata';
+import {landUseFormData} from '../app-static-data/appdata';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LandUseForm = (props) => {
 
-  const [checkedItems, setCheckedItems] = useState(landUseData);
+  const [checkedItems, setCheckedItems] = useState(landUseFormData.landUseData);
 
 
     const handleCheckboxChange = (name) => {
@@ -59,7 +61,8 @@ const LandUseForm = (props) => {
       //setting form to next form 
       props.setFormComponent(1);
     } else {
-      alert("Select atleast One");
+      // alert("Select atleast One");
+      toast.error(landUseFormData.errorMessage, {});
     }
   };
   

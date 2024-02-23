@@ -1,18 +1,23 @@
 // landUseData.js
-const landUseData = {
-  forest: false,
-  scrubShrub: false,
-  grass: false,
-  agriculture: false,
-  residential: false,
-  commercial: false,
-  industrial: false,
-  marshIsland: false,
-  bareLot: false,
-  timberedClearCuts: false,
-  pavedAreas: false,
-  unknownLandUse: false,
+const landUseFormData = {
+  landUseData: {
+    forest: false,
+    scrubShrub: false,
+    grass: false,
+    agriculture: false,
+    residential: false,
+    commercial: false,
+    industrial: false,
+    marshIsland: false,
+    bareLot: false,
+    timberedClearCuts: false,
+    pavedAreas: false,
+    unknownLandUse: false,
+  },
+  errorMessage: "Select atleast one option to continue."
 };
+
+
 
 const overallData = {
   height : {"0 - 5ft": false,
@@ -53,4 +58,4 @@ phragmites: {
 
 };
 
-export {landUseData, overallData};
+export {landUseFormData, overallData};
