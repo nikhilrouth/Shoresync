@@ -63,10 +63,12 @@ const ShorelineFeaturesForm = (props) => {
 const handleContinueClick = () => {
     const validations = [
       {
+        id: 'erosionControlError',
         condition: selectedErosionControlOptions.length === 0,
         message: 'Please select at least one Erosion Control Structure.'
       },
       {
+        id: 'recreationalError',
         condition: selectedRecreactionalOptions.length === 0,
         message: 'Please select at least one Recreational Structure.'
       }
@@ -74,7 +76,7 @@ const handleContinueClick = () => {
   
     validations.forEach(validation => {
       if (validation.condition) {
-        toast.error(validation.message, {});
+        toast.error(validation.message, {toastId: validation.id});
       }
     });
   
