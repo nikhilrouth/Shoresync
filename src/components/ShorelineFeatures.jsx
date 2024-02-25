@@ -108,6 +108,8 @@ const handleContinueClick = () => {
   const handlePrevious = () => {
     props.setFormComponent(1);
     sessionStorage.setItem('formComponent', 1);
+    toast.dismiss('erosionControlError');
+    toast.dismiss('recreationalError');
   };
 
 
