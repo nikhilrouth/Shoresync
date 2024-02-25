@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import CheckboxItem from './CheckBoxItem';
 import './FinalSubmitForm.css'; // Import the CSS file
 
 const FinalSubmitForm = (props) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
-
+  const [location, setLocation] = useState(null);
   const handleFileChange = (event) => {
     // Get the selected files from the event
     const files = Array.from(event.target.files);
@@ -12,7 +11,24 @@ const FinalSubmitForm = (props) => {
     setSelectedFiles(files.filter(file => file.type === 'image/jpeg' || file.type === 'image/png'));
   }
 
+    function handleLocationClick() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            console.log("Geolocation not supported");
+        }
+    }
 
+    function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        setLocation({ latitude, longitude });
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    }
+
+    function error() {
+        console.log("Unable to retrieve your location");
+    }
 const handleSubmitClick = () => {
   alert('Form Submitted');
 };
@@ -36,7 +52,7 @@ useEffect(() => {
   return (
     <div className="form-container">
         <h4 className="form-text">Click here to Synchronize GPS location</h4>
-        <button type="button" className="form-button">
+        <button type="button" className="form-button" onClick={handleLocationClick}>
         Synchronize GPS
         </button>
         <h4 className="form-text">Click here to Process Data Files</h4>

@@ -48,6 +48,9 @@ const LandUseForm = (props) => {
     const isAtLeastOneChecked = Object.values(checkedItems).some(value => value === true);
     if (isAtLeastOneChecked) {
 
+    //fetchUserData()
+
+
       //session storage upodated
       sessionStorage.setItem('landUse', JSON.stringify(checkedItems));
 

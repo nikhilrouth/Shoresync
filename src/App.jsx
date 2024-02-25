@@ -8,8 +8,7 @@ import BankAttributesForm from './components/BankAttributesForm';
 import FinalSubmitForm from './components/FinalSubmitForm'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Images from './images/hero.jpeg'
-
+import Images from './images/hero.jpeg';
 
 
 function App() {
