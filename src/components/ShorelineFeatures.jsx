@@ -99,7 +99,8 @@ const handleContinueClick = () => {
       });
 
       // Add your logic here for what happens when the user clicks Continue
-
+      toast.dismiss('erosionControlError');
+      toast.dismiss('recreationalError');
       props.setFormComponent(3);
     }
   };
