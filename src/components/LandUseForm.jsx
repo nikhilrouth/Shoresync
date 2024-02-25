@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const LandUseForm = (props) => {
+  const customId = "landUseFormToastId";
 
   const [checkedItems, setCheckedItems] = useState(landUseFormData.landUseData);
 
@@ -47,6 +48,7 @@ const LandUseForm = (props) => {
     // Check if at least one item is checked
     const isAtLeastOneChecked = Object.values(checkedItems).some(value => value === true);
     if (isAtLeastOneChecked) {
+      toast.dismiss(customId);
 
     //fetchUserData()
 
@@ -65,7 +67,7 @@ const LandUseForm = (props) => {
       props.setFormComponent(1);
     } else {
       // alert("Select atleast One");
-      toast.error(landUseFormData.errorMessage, {});
+      toast.error(landUseFormData.errorMessage, {toastId: customId});
     }
   };
   
