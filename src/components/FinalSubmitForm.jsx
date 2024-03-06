@@ -24,13 +24,41 @@ const FinalSubmitForm = (props) => {
         const longitude = position.coords.longitude;
         setLocation({ latitude, longitude });
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        console.log('location',location);
     }
 
     function error() {
         console.log("Unable to retrieve your location");
     }
+
+    const fetchUserData = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(props.allFormsData),
+        };
+        fetch("http://localhost:5000/api/addFormData",  requestOptions)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log("data",data)
+
+            })
+    }
+
 const handleSubmitClick = () => {
-  alert('Form Submitted');
+  //alert('Form Submitted');
+
+    // Use a callback function in setAllFormsData to log the updated value
+    props.setAllFormsData(prevData => {
+        const updatedData = { ...prevData, location: location };
+        console.log("All Forms Data:", updatedData);
+        return updatedData;
+    });
+
+    fetchUserData()
+
 };
 
 const handleReset = () => {

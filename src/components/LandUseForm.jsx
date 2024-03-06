@@ -27,20 +27,6 @@ const LandUseForm = (props) => {
 
 
 
-  // const fetchUserData = () => {
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(checkedItems),
-  //   };
-  //   fetch("http://localhost:5000/api/addFormData",  requestOptions)
-  //       .then(response => {
-  //         return response.json()
-  //       })
-  //       .then(data => {
-  //         console.log("data",data)
-  //       })
-  // }
 
 
   const handleContinueClick = () => {
@@ -50,7 +36,6 @@ const LandUseForm = (props) => {
     if (isAtLeastOneChecked) {
       toast.dismiss(customId);
 
-    //fetchUserData()
 
 
       //session storage upodated
