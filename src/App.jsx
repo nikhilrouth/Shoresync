@@ -9,12 +9,15 @@ import FinalSubmitForm from './components/FinalSubmitForm'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Images from './images/hero.jpeg';
+import Login from './components/Login';
+import CreateAccount from './components/CreateAccount';
 
 
 function App() {
 
   const [formComponent, setFormComponent] = useState(0);
   const [allFormsData, setAllFormsData] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     // Set the initial value of formComponent when the component mounts
@@ -28,24 +31,43 @@ function App() {
 
   }, []); // Empty dependency array ensures this effect runs only once when the component mounts
 
+  useEffect(() => {
+    // Check if user is logged in
+    const userLoggedIn = sessionStorage.getItem('loggedIn');
+    if (userLoggedIn) {
+      setLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogin = () => {
+    
+    sessionStorage.setItem('loggedIn', 'true');
+    setLoggedIn(true);
+  };
+
+  
+
   return (
-
-    <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%' }}>
-      <Header />
-      <br></br> 
-      {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData} />}
-      {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
-      {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
-      {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData = {allFormsData} setAllFormsData = {setAllFormsData}/>}
+    <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%', height: '100vh'  }}>
       
-      <ToastContainer />
-      <br></br>
-
-      {/* <LandUseForm /> */}
-      <Footer/>
+      <br/>
+      {!loggedIn && <Login onLogin={handleLogin} />}
+      {loggedIn && (
+        <>
+          <Header />
+          {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          <ToastContainer />
+          <br/>
+          <Footer />
+        </>
+       )}  
     </div>
   );
-};
+}
+
 
 
 export default App;
