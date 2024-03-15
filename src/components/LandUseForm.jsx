@@ -36,16 +36,41 @@ const LandUseForm = (props) => {
     if (isAtLeastOneChecked) {
       toast.dismiss(customId);
 
-
-
-      //session storage upodated
+      //session storage updated
       sessionStorage.setItem('landUse', JSON.stringify(checkedItems));
 
-      // Use a callback function in setAllFormsData to log the updated value
+      //Updates allFormsData object by retreiving other pages items using session storage and adding current updated data from LandUseForm
       props.setAllFormsData(prevData => {
-        const updatedData = { ...prevData, landUse: checkedItems };
-        console.log("All Forms Data:", updatedData);
-        return updatedData;
+          
+          //Data from BankAttributesForm (page 2)
+          const heightItem = (sessionStorage.getItem('heightItem'));
+          const bankStability = (sessionStorage.getItem('bankStability'));
+          const bankCover = (sessionStorage.getItem('bankCover'));
+          const marshBuffer = (sessionStorage.getItem('marshBuffer'));
+          const bankBuffer = (sessionStorage.getItem('bankBuffer'));
+          const phragmitesAustralis = (sessionStorage.getItem('phragmitesAustralis'));
+          const BankAttributesData = {heightItem,bankStability, bankCover, marshBuffer, bankBuffer, phragmitesAustralis }
+
+          //Data from ShoreLineFeatures (page 3)
+          const erosionStructers = JSON.parse(sessionStorage.getItem('erosionStructers'));
+          const recreationalStructures = JSON.parse(sessionStorage.getItem('recreationalStructures'));
+          const otherOptions = JSON.parse(sessionStorage.getItem('otherOptions'));
+          const ShoreLineFeaturesData = {erosionStructers, recreationalStructures, otherOptions}
+
+          //Data from FinalSubmitForm (page 4)
+          const longitude= sessionStorage.getItem('longitude');
+          const latitude = sessionStorage.getItem('latitude');
+          const image = sessionStorage.getItem('compressedImage');
+          const FinalSubmitForm = {longitude, latitude, image};
+
+          //compiling previous data and adding LandUseForm data to the updatedData
+          const previousData = { BankAttributesData, ShoreLineFeaturesData, FinalSubmitForm};
+          const updatedDatas = { ...previousData, landUse: checkedItems};
+
+
+        sessionStorage.setItem('allFormsData', JSON.stringify(updatedDatas));
+        console.log("AllFormsData: ", JSON.parse(sessionStorage.getItem('allFormsData')));
+        return updatedDatas;
       });
 
       //setting form to next form 
@@ -87,6 +112,8 @@ const LandUseForm = (props) => {
     var recieved = sessionStorage.getItem('landUse');
     var parsedRecieved = JSON.parse(recieved);
     setCheckedItems(parsedRecieved); 
+
+    // console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
     }  
   },[]);   
 

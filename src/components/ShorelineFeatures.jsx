@@ -91,12 +91,37 @@ const handleContinueClick = () => {
       console.log('Selected other:', selectedOtherOptions);
       sessionStorage.setItem('otherOptions', JSON.stringify(selectedOtherOptions));
 
+      
       // Use a callback function in setAllFormsData to log the updated value
       props.setAllFormsData(prevData => {
-        const updatedData = { ...prevData, ShorelineFeaturesData: {selectedErosionControlOptions, selectedRecreactionalOptions, selectedOtherOptions} };
-        console.log("All Forms Data:", updatedData);
-        return updatedData;
+
+        //Data from LandUseForm (page 1)
+        const landUse = JSON.parse(sessionStorage.getItem('landUse'));
+
+        //Data from BankAttributesForm (page 2)
+        const heightItem = (sessionStorage.getItem('heightItem'));
+        const bankStability = (sessionStorage.getItem('bankStability'));
+        const bankCover = (sessionStorage.getItem('bankCover'));
+        const marshBuffer = (sessionStorage.getItem('marshBuffer'));
+        const bankBuffer = (sessionStorage.getItem('bankBuffer'));
+        const phragmitesAustralis = (sessionStorage.getItem('phragmitesAustralis'));
+        const BankAttributesData = {heightItem,bankStability, bankCover, marshBuffer, bankBuffer, phragmitesAustralis }
+
+        //Data from FinalSubmitForm (page 4)
+        const longitude= sessionStorage.getItem('longitude');
+        const latitude = sessionStorage.getItem('latitude');
+        const image = sessionStorage.getItem('compressedImage');
+        const FinalSubmitForm = {longitude, latitude, image};
+
+        const previousData = { landUse, BankAttributesData, FinalSubmitForm};
+        const updatedDatas = { ...previousData, ShorelineFeaturesData: {selectedErosionControlOptions, selectedRecreactionalOptions, selectedOtherOptions}};
+
+
+        sessionStorage.setItem('allFormsData', JSON.stringify(updatedDatas));
+        console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
+        return updatedDatas;
       });
+
 
       // Add your logic here for what happens when the user clicks Continue
       toast.dismiss('erosionControlError');
@@ -145,6 +170,7 @@ const handleContinueClick = () => {
     }
     }
 
+    // console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
     sessionStorage.setItem('formComponent', 2);
    
   },[]);  

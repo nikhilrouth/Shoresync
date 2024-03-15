@@ -154,6 +154,7 @@ const BankAttributesForm = (props) => {
         handleCheckboxChange5(item5);
       }
 
+      // console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
       sessionStorage.setItem('formComponent', 1);
         
     }, []);
@@ -190,13 +191,32 @@ const BankAttributesForm = (props) => {
         sessionStorage.setItem('phragmitesAustralis', selected5);
 
         // Add your logic here for what happens when the user clicks Continue
-        
         props.setAllFormsData(prevData => {
-          const updatedData = { ...prevData, BankAttributesData: {heightItem: heightItems, stabilityItem: stabilityItems, 
+
+          //Data from LandUseForm
+          const landUse = JSON.parse(sessionStorage.getItem('landUse'));
+
+          //Data from ShoreLineFeatures (page 3)
+          const erosionStructers = JSON.parse(sessionStorage.getItem('erosionStructers'));
+          const recreationalStructures = JSON.parse(sessionStorage.getItem('recreationalStructures'));
+          const otherOptions = JSON.parse(sessionStorage.getItem('otherOptions'));
+          const ShoreLineFeaturesData = {erosionStructers, recreationalStructures, otherOptions}
+
+          //Data from FinalSubmitForm (page 4)
+          const longitude= sessionStorage.getItem('longitude');
+          const latitude = sessionStorage.getItem('latitude');
+          const image = sessionStorage.getItem('compressedImage');
+          const FinalSubmitForm = {longitude, latitude, image};
+          
+          const previousData = {landUse, ShoreLineFeaturesData, FinalSubmitForm};
+          const updatedDatas = { ...previousData, BankAttributesData: {heightItem: heightItems, stabilityItem: stabilityItems, 
             coverItem: coverItems, marshItem: marshItems, beachItem: beachItems, phragmitesAustralis: selected5}};
-          console.log("All Forms Data:", updatedData);
-          return updatedData;
-        });
+       
+          sessionStorage.setItem('allFormsData', JSON.stringify(updatedDatas));
+          console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
+
+          return updatedDatas;
+        });        
 
         //Next Screen
         props.setFormComponent(2);
