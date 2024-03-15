@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './FinalSubmitForm.css'; // Import the CSS file
 import Compressor from 'compressorjs';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FinalSubmitForm = (props) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -58,7 +60,7 @@ const FinalSubmitForm = (props) => {
         console.log("Unable to retrieve your location");
     }
 
-    const fetchUserData = () => {
+    const sendFormData = () => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -74,59 +76,94 @@ const FinalSubmitForm = (props) => {
             })
     }
 
+    const sendImages = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'image/png' },
+            body: JSON.stringify(props.allFormsData),
+        };
+        fetch("http://localhost:5000/api/addImages",  requestOptions)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log("data",data)
+
+            })
+    }
+
 const handleSubmitClick = () => {
 
-  //page one
-    const landUse = JSON.parse(sessionStorage.getItem('landUse')); 
-
-    //page two
-    const heightItem = (sessionStorage.getItem('heightItem'));
-    const bankStability = (sessionStorage.getItem('bankStability'));
-    const bankCover = (sessionStorage.getItem('bankCover'));
-    const marshBuffer = (sessionStorage.getItem('marshBuffer'));
-    const bankBuffer = (sessionStorage.getItem('bankBuffer'));
-    const phragmitesAustralis = (sessionStorage.getItem('phragmitesAustralis'));
-    const BankAttributesData = {heightItem,bankStability, bankCover, marshBuffer, bankBuffer, phragmitesAustralis }
+      if(!location){
+          toast.error("Synchronize GPS Coordinates",{toastId: "locationError"});
+      }else {
 
 
-    //page 3
-    const erosionStructers = JSON.parse(sessionStorage.getItem('erosionStructers'));
-    const recreationalStructures = JSON.parse(sessionStorage.getItem('recreationalStructures'));
-    const otherOptions = JSON.parse(sessionStorage.getItem('otherOptions'));
-    const ShoreLineFeaturesData = {erosionStructers, recreationalStructures, otherOptions}
+          //page one
+          const landUse = JSON.parse(sessionStorage.getItem('landUse'));
 
-
-    //page 4- current page
-    const longitude= sessionStorage.getItem('longitude');
-    const latitude = sessionStorage.getItem('latitude');
-    const compressedImage = sessionStorage.getItem('compressedImage');
-
-    const isAtLeastOneChecked = Object.values(landUse).some(value => value === true);
-
-    
-    //validation of every page
-    if(isAtLeastOneChecked){
-
-      if(heightItem !==null && bankStability !==null && bankCover !==null && marshBuffer !==null && bankBuffer !==null && phragmitesAustralis !==null){
-        if(erosionStructers != null && recreationalStructures != null){
-          if(longitude != null && latitude != null && compressedImage != null){
-            console.log('came here');
-
-            props.setAllFormsData(prevData => {
-
-                const previousData = {landUse, BankAttributesData, ShoreLineFeaturesData}
-                const updatedData = { ...previousData, FinalSubmitForm: {longitude: longitude, latitude: latitude, image: compressedImage }};
-
-                sessionStorage.setItem('allFormsData', JSON.stringify(updatedData));
-                console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
-                return updatedData;
-            });
-
-          // fetchUserData()
+          //page two
+          const heightItem = (sessionStorage.getItem('heightItem'));
+          const bankStability = (sessionStorage.getItem('bankStability'));
+          const bankCover = (sessionStorage.getItem('bankCover'));
+          const marshBuffer = (sessionStorage.getItem('marshBuffer'));
+          const bankBuffer = (sessionStorage.getItem('bankBuffer'));
+          const phragmitesAustralis = (sessionStorage.getItem('phragmitesAustralis'));
+          const BankAttributesData = {
+              heightItem,
+              bankStability,
+              bankCover,
+              marshBuffer,
+              bankBuffer,
+              phragmitesAustralis
           }
+
+
+          //page 3
+          const erosionStructers = JSON.parse(sessionStorage.getItem('erosionStructers'));
+          const recreationalStructures = JSON.parse(sessionStorage.getItem('recreationalStructures'));
+          const otherOptions = JSON.parse(sessionStorage.getItem('otherOptions'));
+          const ShoreLineFeaturesData = {erosionStructers, recreationalStructures, otherOptions}
+
+
+          //page 4- current page
+          const longitude = sessionStorage.getItem('longitude');
+          const latitude = sessionStorage.getItem('latitude');
+          const compressedImage = sessionStorage.getItem('compressedImage');
+
+          const isAtLeastOneChecked = Object.values(landUse).some(value => value === true);
+
+
+          //validation of every page
+          if (isAtLeastOneChecked) {
+
+              if (heightItem !== null && bankStability !== null && bankCover !== null && marshBuffer !== null && bankBuffer !== null && phragmitesAustralis !== null) {
+                  if (erosionStructers != null && recreationalStructures != null) {
+                      if (longitude != null && latitude != null && compressedImage != null) {
+                          console.log('came here');
+
+                          props.setAllFormsData(prevData => {
+
+                              const previousData = {landUse, BankAttributesData, ShoreLineFeaturesData}
+                              const updatedData = {
+                                  ...previousData,
+                                  FinalSubmitForm: {longitude: longitude, latitude: latitude, image: compressedImage}
+                              };
+
+                              sessionStorage.setItem('allFormsData', JSON.stringify(updatedData));
+                              console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
+                              return updatedData;
+                          });
+
+                          sendFormData()
+                          sendImages()
+                      }
+                  }
+              }
+          }
+
+          toast.dismiss('locationError');
       }
-    }
-  }
 
 };
 
@@ -153,18 +190,19 @@ useEffect(() => {
         <button type="button" className="form-button" onClick={handleLocationClick}>
         Synchronize GPS
         </button>
+        {location &&
         <div>
 
-            {location &&
+
         <label htmlFor="Latitude" >
             Latitude: {location.latitude} &nbsp; &nbsp;
-        </label>}
+        </label>
 
-            {location!=null &&
+
         <label htmlFor="Longitude" >
             Longitude: {location.longitude}
-        </label>}
-        </div>
+        </label>
+        </div>}
         <h4 className="form-text">Click here to Process Data Files</h4>
         <div>
             <button type="button" className="form-button">
