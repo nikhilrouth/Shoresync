@@ -48,7 +48,7 @@ function App() {
   
 
   return (
-    <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%', height: '100vh'  }}>
+    <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%', height: formComponent !== 1 ? '100vh' : undefined  }}>
       
       <br/>
       {!loggedIn && <Login onLogin={handleLogin} />}
