@@ -153,6 +153,18 @@ useEffect(() => {
         <button type="button" className="form-button" onClick={handleLocationClick}>
         Synchronize GPS
         </button>
+        <div>
+
+            {location &&
+        <label htmlFor="Latitude" >
+            Latitude: {location.latitude} &nbsp; &nbsp;
+        </label>}
+
+            {location!=null &&
+        <label htmlFor="Longitude" >
+            Longitude: {location.longitude}
+        </label>}
+        </div>
         <h4 className="form-text">Click here to Process Data Files</h4>
         <div>
             <button type="button" className="form-button">
