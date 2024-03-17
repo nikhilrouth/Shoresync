@@ -51,7 +51,7 @@ function App() {
     <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%', height: formComponent !== 1 ? '100vh' : undefined  }}>
       
       <br/>
-      {!loggedIn && <Login onLogin={handleLogin} />}
+      {/* {!loggedIn && <Login onLogin={handleLogin} />}
       {loggedIn && (
         <>
           <Header />
@@ -63,7 +63,18 @@ function App() {
           <br/>
           <Footer />
         </>
-       )}  
+       )}   */}
+
+<>
+          <Header />
+          {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          <ToastContainer />
+          <br/>
+          <Footer />
+        </>
     </div>
   );
 }

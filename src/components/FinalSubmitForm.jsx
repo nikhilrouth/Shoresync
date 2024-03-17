@@ -156,7 +156,7 @@ const handleSubmitClick = () => {
                           });
 
                           sendFormData()
-                          sendImages()
+                          // sendImages()
                       }
                   }
               }
