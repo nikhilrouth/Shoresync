@@ -30,7 +30,16 @@ const FinalSubmitForm = (props) => {
         setCompressedFile(compressedResult)
         console.log('compression size: ', compressedResult.size/1024);
         console.log('compression result: ', compressedResult);
-        sessionStorage.setItem('compressedImage', compressedResult);
+        //use session storage to receive already existing 
+        const alreadyExistingImages = sessionStorage.getItem('compressedImage');
+
+        if(alreadyExistingImages != null){
+          const compressedImages = [alreadyExistingImages, compressedResult];
+          sessionStorage.setItem('compressedImage', compressedImages);
+        } else {
+          sessionStorage.setItem('compressedImage', compressedResult);
+        }
+        
       },
     }) ;
 
