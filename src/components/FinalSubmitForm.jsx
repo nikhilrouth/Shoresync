@@ -86,10 +86,13 @@ const FinalSubmitForm = (props) => {
     }
 
     const sendImages = () => {
+        const formData = new FormData();
+        formData.append("image", sessionStorage.getItem('compressedImage'));
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'image/png' },
-            body: JSON.stringify(props.allFormsData),
+            /*headers: { 'Content-Type': 'image/jpeg' },*/
+            headers: { 'Content-Type': 'image/jpeg' },
+            body: JSON.stringify(formData),
         };
         fetch("http://localhost:5000/api/addImages",  requestOptions)
             .then(response => {
@@ -97,9 +100,9 @@ const FinalSubmitForm = (props) => {
             })
             .then(data => {
                 console.log("data",data)
-
             })
     }
+
 
 const handleSubmitClick = () => {
 
@@ -165,7 +168,8 @@ const handleSubmitClick = () => {
                           });
 
                           sendFormData()
-                          // sendImages()
+                          sendImages()
+
                       }
                   }
               }
