@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import {overallData} from '../app-static-data/appdata';
 import { Tooltip } from "../tooltip";
 import Data from "../Data.json"
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const BankAttributesForm = (props) => {
@@ -222,7 +224,7 @@ const BankAttributesForm = (props) => {
         props.setFormComponent(2);
 
         } else {
-          alert("Select a choice for every attribute!");
+          toast.error("Select a choice for every attribute!", {toastId: 'bankAttributesError'});
         }
       };
       
