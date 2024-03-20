@@ -16,14 +16,14 @@ const FinalSubmitForm = (props) => {
     const files = Array.from(event.target.files);
     setSelectedFiles(files.filter(file => file.type === 'image/jpeg' || file.type === 'image/png'));
 
-    //Original image size
+    // Original images size
     files.map((file, index) => (
       console.log("Image Size: ", file.size/1024)
       )
     );
 
-    //Compresses the image received and saves it to session storage
-    const image = event.target.files[0];
+    //Compresses the images received and saves it to session storage
+    files.map((image, index) => (
     new Compressor(image, {
       quality: 0.8,
       success: (compressedResult) => {
@@ -41,7 +41,8 @@ const FinalSubmitForm = (props) => {
         }
         
       },
-    }) ;
+    }) 
+    ));
 
     
   }
