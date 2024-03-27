@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './FinalSubmitForm.css'; // Import the CSS file
 import Compressor from 'compressorjs';
 import { toast } from 'react-toastify';
@@ -8,7 +8,7 @@ const FinalSubmitForm = (props) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [location, setLocation] = useState(null);
   const [compressedFile, setCompressedFile] = useState(null);
-
+  const [uniqueNumber, setUniqueNumber] = useState(0);
 
   const handleFileChange = (event) => {
 
@@ -65,7 +65,11 @@ const FinalSubmitForm = (props) => {
         sessionStorage.setItem('longitude', longitude);
         sessionStorage.setItem('latitude', latitude);
     }
-
+    function generateUniqueNumber()  {
+        const timestamp = new Date().valueOf(); // Get current timestamp
+        setUniqueNumber(parseInt(String(timestamp).slice(-6), 10)); // Trim to 8 digits
+        return uniqueNumber;
+    }
     function error() {
         console.log("Unable to retrieve your location");
     }
@@ -86,13 +90,15 @@ const FinalSubmitForm = (props) => {
             })
     }
 
-    const sendImages = () => {
-        const formData = new FormData();
+
+    const sendImages = async(event) => {
+        /*const formData = new FormData();
         formData.append("image", sessionStorage.getItem('compressedImage'));
+        // formData.append("txid",1);
         const requestOptions = {
             method: 'POST',
-            /*headers: { 'Content-Type': 'image/jpeg' },*/
-            headers: { 'Content-Type': 'image/jpeg' },
+            /!*headers: { 'Content-Type': 'image/jpeg' },*!/
+            /!*headers: { 'Content-Type': 'multipart/form-data' },*!/
             body: JSON.stringify(formData),
         };
         fetch("http://localhost:5000/api/addImages",  requestOptions)
@@ -101,9 +107,34 @@ const FinalSubmitForm = (props) => {
             })
             .then(data => {
                 console.log("data",data)
-            })
-    }
+            })*/
 
+        // event.preventDefault();
+
+        const files = sessionStorage.getItem('compressedImage');
+        const formData = new FormData();
+        console.log("uniqueNumber",uniqueNumber);
+        formData.append("txid",uniqueNumber);
+        // for (let i = 0; i < files.length; i++) {
+        //     formData.append('image', files[i]);
+        // }
+        formData.append("image",sessionStorage.getItem('compressedImage'));
+        try {
+            const response = await fetch('/api/addImages', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!response.ok) {
+                throw new Error('Response is not OK');
+            }
+
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
 const handleSubmitClick = () => {
 
@@ -167,7 +198,7 @@ const handleSubmitClick = () => {
                               console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
                               return updatedData;
                           });
-
+                          generateUniqueNumber()
                           sendFormData()
                           sendImages()
 
