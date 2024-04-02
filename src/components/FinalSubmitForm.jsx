@@ -3,6 +3,7 @@ import './FinalSubmitForm.css'; // Import the CSS file
 import Compressor from 'compressorjs';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import imageCompression from 'browser-image-compression';
 
 const FinalSubmitForm = (props) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -65,11 +66,17 @@ const FinalSubmitForm = (props) => {
         sessionStorage.setItem('longitude', longitude);
         sessionStorage.setItem('latitude', latitude);
     }
-    function generateUniqueNumber()  {
-        const timestamp = new Date().valueOf(); // Get current timestamp
-        setUniqueNumber(parseInt(String(timestamp).slice(-6), 10)); // Trim to 8 digits
-        return uniqueNumber;
+
+
+    let unumber = 0;
+    const generateUniqueNumber=async()=>   {
+        var sixDigitNumber = Math.floor(Math.random() * 1000000);
+        setUniqueNumber(sixDigitNumber);
+        console.log("unique number generated::", uniqueNumber)
+
     }
+
+
     function error() {
         console.log("Unable to retrieve your location");
     }
@@ -89,6 +96,13 @@ const FinalSubmitForm = (props) => {
 
             })
     }
+
+    const [selectedFiles1, setSelectedFiles1] = useState(null);
+
+    const handleFileChange1 = (event) => {
+        setSelectedFiles1(event.target.files);
+    };
+
 
 
     const sendImages = async(event) => {
@@ -111,14 +125,23 @@ const FinalSubmitForm = (props) => {
 
         // event.preventDefault();
 
-        const files = sessionStorage.getItem('compressedImage');
+        const options = {
+            maxSizeMB: 1,
+            maxWidthOrHeight: 1920,
+            useWebWorker: true,
+        }
+
+
+
+        var files = sessionStorage.getItem('compressedImage');
         const formData = new FormData();
         console.log("uniqueNumber",uniqueNumber);
         formData.append("txid",uniqueNumber);
-        // for (let i = 0; i < files.length; i++) {
-        //     formData.append('image', files[i]);
-        // }
-        formData.append("image",sessionStorage.getItem('compressedImage'));
+        for (let i = 0; i < selectedFiles.length; i++) {
+            const compressedFile = await imageCompression(selectedFiles[i], options);
+            formData.append('image', compressedFile);
+        }
+        //formData.append("image",sessionStorage.getItem('compressedImage'));
         try {
             const response = await fetch('/api/addImages', {
                 method: 'POST',
@@ -136,13 +159,14 @@ const FinalSubmitForm = (props) => {
         }
     }
 
-const handleSubmitClick = () => {
+const handleSubmitClick = async() => {
 
       if(!location){
           toast.error("Synchronize GPS Coordinates",{toastId: "locationError"});
       }else {
 
-
+          var sixDigitNumber = Math.floor(Math.random() * 1000000);
+          setUniqueNumber(sixDigitNumber);
           //page one
           const landUse = JSON.parse(sessionStorage.getItem('landUse'));
 
@@ -184,21 +208,23 @@ const handleSubmitClick = () => {
               if (heightItem !== null && bankStability !== null && bankCover !== null && marshBuffer !== null && bankBuffer !== null && phragmitesAustralis !== null) {
                   if (erosionStructers != null && recreationalStructures != null) {
                       if (longitude != null && latitude != null && compressedImage != null) {
-                          console.log('came here');
+
 
                           props.setAllFormsData(prevData => {
 
                               const previousData = {landUse, BankAttributesData, ShoreLineFeaturesData}
                               const updatedData = {
                                   ...previousData,
-                                  FinalSubmitForm: {longitude: longitude, latitude: latitude, image: compressedImage}
+                                  FinalSubmitForm: {longitude: longitude, latitude: latitude, image: compressedImage, txnid:sixDigitNumber}
                               };
+
+
 
                               sessionStorage.setItem('allFormsData', JSON.stringify(updatedData));
                               console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
                               return updatedData;
                           });
-                          generateUniqueNumber()
+
                           sendFormData()
                           sendImages()
 
@@ -256,7 +282,7 @@ useEffect(() => {
         </div>
         <div className="upload-container">
         <h4 className="form-text">Click here to Upload Images</h4>
-        
+
     
         {/* <label htmlFor="file-upload" className="upload-button">
         Upload Images
