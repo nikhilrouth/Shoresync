@@ -53,6 +53,7 @@ function App() {
       <br/>
 
 
+      
         {/* {!loggedIn && <Login onLogin={handleLogin} />}
       {loggedIn && (
         <>
@@ -68,7 +69,7 @@ function App() {
        )}   */}
 
         <>
-            <Header />
+            <Header setFormComponent={setFormComponent}/>
             {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
