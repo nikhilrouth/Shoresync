@@ -44,6 +44,8 @@ h1 {
 .link {
   color: black; 
   text-decoration: none;
+  margin-right: 20px; /* Add right margin to space out links */
+  padding: 8px 15px; /* Add padding for better clickability and visual separation */
 
   
 
