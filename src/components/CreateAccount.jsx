@@ -60,11 +60,15 @@ function CreateAccount(setFormComponent) {
       if (response.data.success) {
         toast.success("Successfully signed up with ShoreSync!");
         // Reset form fields after successful registration
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
+        setTimeout(() => {
+          // Reset form fields after successful registration
+          setEmail('');
+          setPassword('');
+          setConfirmPassword('');
+          // Navigate to login page after a delay
+          navigate('/Login');
+        }, 2000); 
         // setFormComponent(0); // Redirect to login page
-        navigate('/Login');
 
       } else {
         toast.error(response.data.message || "An error occurred during registration.");

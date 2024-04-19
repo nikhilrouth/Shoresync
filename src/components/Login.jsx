@@ -35,34 +35,36 @@ function Login({setFormComponent}) {
 
   const handleSubmit = async (e) => {
     //  uncomment here!!!!
-    // e.preventDefault();
-    // try {
-    //   const response = await fetch('http://localhost:5001/api/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ email: username, password: password })
-    //   });
-    //   const data = await response.json();
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5001/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: username, password: password })
+      });
+      const data = await response.json();
 
      
-    //   if (response.ok) {
-    //     toast.success(data.message);
-    //     sessionStorage.setItem('authToken', data.token); // Save token to session storage
-        // Redirect to LandUseForm or whatever the first form component is
+      if (response.ok) {
+        toast.success(data.message);
+        setTimeout(() => {
+          sessionStorage.setItem('authToken', data.token); // Save token to session storage
+          // Redirect to the home page or first form component after a delay
+          navigate('/');
+        }, 2000);
 
 
         // setFormComponent(2); // Assuming 2 is the index for LandUseForm
-        navigate('/');
 
 
-  //     } else {
-  //       toast.error(data.message);
-  //       setPassword(''); // Clear password field
-  //     }
-  //   } catch (error) {
-  //     console.error('Login error:', error);
-  //     toast.error("Login failed. Please try again.");
-  // }
+      } else {
+        toast.error(data.message);
+        setPassword(''); // Clear password field
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error("Login failed. Please try again.");
+  }
 
   
 
