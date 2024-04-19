@@ -77,7 +77,7 @@ function CreateAccount(setFormComponent) {
 
   return (
 
-    <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%' }}>
+    <div className='test' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%' }}>
     <div className="account-container">
          <img src={favicon} alt="Logo" />
       <h2 >Sign Up to ShoreSync</h2>

@@ -70,7 +70,7 @@ function Login({setFormComponent}) {
 
   return (
      
-    <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%' }}>
+    <div className='test' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%' }}>
       
     <div className="login-container">
         <img src={favicon} alt="Logo" />
