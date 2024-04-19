@@ -11,6 +11,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import Images from './images/hero.jpeg';
 import Login from './components/Login';
 import CreateAccount from './components/CreateAccount';
+import ThanksPage from './components/ThanksPage';
+import { toast } from 'react-toastify';
+
+
 
 
 function App() {
@@ -26,6 +30,7 @@ function App() {
 
     if(component === null) {
       component = 0
+      sessionStorage.setItem('formComponent', component);
     }
     setFormComponent(parseInt(component)); // Set it to 1 or any other initial value as needed
 
@@ -36,13 +41,28 @@ function App() {
     const userLoggedIn = sessionStorage.getItem('loggedIn');
     if (userLoggedIn) {
       setLoggedIn(true);
+      setFormComponent(2);
     }
   }, []);
+
+  useEffect(() => {
+    console.log("Current form component:", formComponent);
+}, [formComponent]);
+
+
 
   const handleLogin = () => {
     
     sessionStorage.setItem('loggedIn', 'true');
     setLoggedIn(true);
+    setFormComponent(0);
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('loggedIn');
+    setLoggedIn(false);
+    setFormComponent(0);  // Optionally reset form component on logout
+    toast.info("You have been logged out.");
   };
 
   
@@ -52,28 +72,32 @@ function App() {
       
       <br/>
 
-
-      
-        {/* {!loggedIn && <Login onLogin={handleLogin} />}
-      {loggedIn && (
         <>
-          <Header />
-          {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-          {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-          {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-          {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-          <ToastContainer />
-          <br/>
-          <Footer />
-        </>
-       )}   */}
-
-        <>
+        {/* {!loggedIn && <Login setFormComponent={setFormComponent} />} */}
             <Header setFormComponent={setFormComponent}/>
-            {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+            {/* {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+            {formComponent === 4 && <ThanksPage setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />} */}
+            
+            <Header onLogout={handleLogout} />
+            {/* {!loggedIn ? (
+              <>
+                {formComponent === 0 && <Login onLogin={handleLogin} />}
+                {formComponent === 1 && <CreateAccount />}
+              </>
+            ) : (
+              <>
+                {formComponent === 2 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+                {formComponent === 3 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+                {formComponent === 4 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+                {formComponent === 5 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+                {formComponent === 6 && <ThanksPage setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+              </>
+            )} */}
+            
+            
             <ToastContainer />
             <br/>
             <Footer />

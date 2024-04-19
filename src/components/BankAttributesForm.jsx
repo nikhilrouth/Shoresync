@@ -121,7 +121,7 @@ const BankAttributesForm = (props) => {
 
     const handlePrevious = () => {
       props.setFormComponent(0);
-      sessionStorage.setItem('formComponent', 0);
+      sessionStorage.setItem('formComponent', 2);
     };
   
     //Session Storage Beginning

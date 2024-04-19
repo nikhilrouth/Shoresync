@@ -3,9 +3,10 @@ import './CreateAccount.css'; // Import the CSS file
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import axios from 'axios';
 
 
-function CreateAccount() {
+function CreateAccount(setFormComponent) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,18 +24,47 @@ function CreateAccount() {
     setConfirmPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   toast.success("Successfully signed up with ShoreSync!");
+
+
+  //   // Perform validation, check if passwords match, etc.
+  //   console.log('Submitted:', { email, password, confirmPassword });
+  //   // Reset form fields after submission
+  //   setEmail('');
+  //   setPassword('');
+  //   setConfirmPassword('');
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
 
-    toast.success("Successfully signed up with ShoreSync!");
+    try {
+      const response = await axios.post('http://localhost:5001/api/register', {
+        email: email,
+        password: password
+      });
 
-
-    // Perform validation, check if passwords match, etc.
-    console.log('Submitted:', { email, password, confirmPassword });
-    // Reset form fields after submission
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
+      if (response.data.success) {
+        toast.success("Successfully signed up with ShoreSync!");
+        // Reset form fields after successful registration
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setFormComponent(0); // Redirect to login page
+      } else {
+        toast.error(response.data.message || "An error occurred during registration.");
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      toast.error("Registration failed. Please try again.");
+    }
   };
 
   return (

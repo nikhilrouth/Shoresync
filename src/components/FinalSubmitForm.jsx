@@ -87,7 +87,7 @@ const FinalSubmitForm = (props) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(props.allFormsData),
         };
-        fetch("http://localhost:5000/api/addFormData",  requestOptions)
+        fetch("http://localhost:5001/api/addFormData",  requestOptions)
             .then(response => {
                 return response.json()
             })
@@ -115,7 +115,7 @@ const FinalSubmitForm = (props) => {
             /!*headers: { 'Content-Type': 'multipart/form-data' },*!/
             body: JSON.stringify(formData),
         };
-        fetch("http://localhost:5000/api/addImages",  requestOptions)
+        fetch("http://localhost:5001/api/addImages",  requestOptions)
             .then(response => {
                 return response.json()
             })
@@ -227,13 +227,18 @@ const handleSubmitClick = async() => {
 
                           sendFormData()
                           sendImages()
+                          
 
                       }
                   }
               }
           }
+          
 
           toast.dismiss('locationError');
+          props.setFormComponent(4);  
+        
+       
       }
 
 };
@@ -244,14 +249,14 @@ const handleReset = () => {
 
 const handlePrevious = () => {
   props.setFormComponent(2);
-  sessionStorage.setItem('formComponent', 2);
+  sessionStorage.setItem('formComponent', 4);
 }
 
 
 useEffect(() => {
 
   console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
-  sessionStorage.setItem('formComponent', 3);
+  sessionStorage.setItem('formComponent', 5);
 
 });
 
