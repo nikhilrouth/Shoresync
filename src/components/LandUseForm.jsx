@@ -85,18 +85,18 @@ const LandUseForm = (props) => {
 
   const handleReset = () => {
     setCheckedItems({
-      forest: false,
-      scrubShrub: false,
-      grass: false,
-      agriculture: false,
-      residential: false,
-      commercial: false,
-      industrial: false,
-      marshIsland: false,
-      bareLot: false,
-      timberedClearCuts: false,
-      pavedAreas: false,
-      unknownLandUse: false,
+      "Forest": false,
+      "Scrub shrub": false,
+      "Grass": false,
+      "Agriculture": false,
+      "Residential": false,
+      "Commercial": false,
+      "Industrial": false,
+      "Marsh island": false,
+      "Bare lot": false,
+      "Timbered clear cuts": false,
+      "Paved areas": false,
+      "Unknown land use": false,
     });
     sessionStorage.removeItem('landUse');
     // Create a copy of the data object
@@ -115,6 +115,8 @@ const LandUseForm = (props) => {
 
     // console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
     }  
+    sessionStorage.setItem("formComponent", 0);
+
   },[]);   
 
 

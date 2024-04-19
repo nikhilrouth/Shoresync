@@ -171,7 +171,7 @@ const handleContinueClick = () => {
     }
 
     // console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
-    sessionStorage.setItem('formComponent', 3);
+    sessionStorage.setItem('formComponent', 2);
    
   },[]);  
 

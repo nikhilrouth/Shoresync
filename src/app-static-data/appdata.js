@@ -1,18 +1,18 @@
 // landUseData.js
 const landUseFormData = {
   landUseData: {
-    forest: false,
-    scrubShrub: false,
-    grass: false,
-    agriculture: false,
-    residential: false,
-    commercial: false,
-    industrial: false,
-    marshIsland: false,
-    bareLot: false,
-    timberedClearCuts: false,
-    pavedAreas: false,
-    unknownLandUse: false,
+    "Forest": false,
+    "Scrub shrub": false,
+    "Grass": false,
+    "Agriculture": false,
+    "Residential": false,
+    "Commercial": false,
+    "Industrial": false,
+    "Marsh island": false,
+    "Bare lot": false,
+    "Timbered clear cuts": false,
+    "Paved areas": false,
+    "Unknown land use": false,
   },
   errorMessage: "Select atleast one option to continue."
 };

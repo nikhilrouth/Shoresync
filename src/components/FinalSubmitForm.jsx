@@ -65,7 +65,7 @@ const FinalSubmitForm = (props) => {
 
         sessionStorage.setItem('longitude', longitude);
         sessionStorage.setItem('latitude', latitude);
-    }
+    } 
 
 
     let unumber = 0;
@@ -82,11 +82,11 @@ const FinalSubmitForm = (props) => {
     }
 
     const sendFormData = () => {
-        console.log("hello came here");
+        console.log("Object in SendFormData", props.allFormsData);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(props.allFormsData),
+            body: JSON.stringify(JSON.parse(sessionStorage.getItem('allFormsData'))),
         };
 
 
@@ -165,8 +165,10 @@ const FinalSubmitForm = (props) => {
 
 const handleSubmitClick = async() => {
 
-      if(!location){
+      if(!sessionStorage.getItem('latitude')){
           toast.error("Synchronize GPS Coordinates",{toastId: "locationError"});
+      }if(!sessionStorage.getItem('compressedImage')){
+        toast.error("Upload an image",{toastId: "imageError"});
       }else {
 
           var sixDigitNumber = Math.floor(Math.random() * 1000000);
@@ -219,15 +221,18 @@ const handleSubmitClick = async() => {
                               const previousData = {landUse, BankAttributesData, ShoreLineFeaturesData}
                               const updatedData = {
                                   ...previousData,
-                                  FinalSubmitForm: {longitude: longitude, latitude: latitude, image: compressedImage, txnid:sixDigitNumber}
+                                  FinalSubmitForm: {longitude: sessionStorage.getItem('longitude'), latitude: sessionStorage.getItem('latitude'), image: sessionStorage.getItem('compressedImage'), txnid:sixDigitNumber}
                               };
 
 
 
                               sessionStorage.setItem('allFormsData', JSON.stringify(updatedData));
                               console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
+                              console.log("prop data", props.allFormsData);
                               return updatedData;
                           });
+
+                        //   console.log(props.allFormsData);
 
                           sendFormData()
                           sendImages()
@@ -248,7 +253,13 @@ const handleSubmitClick = async() => {
 };
 
 const handleReset = () => {
-  alert('Reset Clicked');
+    sessionStorage.removeItem('longitude');
+    sessionStorage.removeItem('latitude');
+    sessionStorage.removeItem('compressedImage');
+    setLocation(null);
+    setSelectedFiles(null);
+    setCompressedFile(null)
+
 };
 
 const handlePrevious = () => {
@@ -260,37 +271,47 @@ const handlePrevious = () => {
 useEffect(() => {
 
   console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
-  sessionStorage.setItem('formComponent', 5);
+  console.log("latty", sessionStorage.getItem('latitude'));
+//   console.log("Page location", location.latitude);
+
+  const existingImages = sessionStorage.getItem('compressedImage');
+  console.log("heij", existingImages);
+
+
+
+  sessionStorage.setItem('formComponent', 3);
 
 });
 
+
   return (
     <div className="form-container">
+        <h2 className="form-header">Upload Location and Images</h2>
+
         <h4 className="form-text">Click here to Synchronize GPS location</h4>
         <button type="button" className="form-button" onClick={handleLocationClick}>
         Synchronize GPS
         </button>
-        {location &&
+        {sessionStorage.getItem('latitude') &&
         <div>
 
 
         <label htmlFor="Latitude" >
-            Latitude: {location.latitude} &nbsp; &nbsp;
+            Latitude: {sessionStorage.getItem('latitude')} &nbsp; &nbsp;
         </label>
 
 
         <label htmlFor="Longitude" >
-            Longitude: {location.longitude}
+            Longitude: {sessionStorage.getItem('longitude')}
         </label>
         </div>}
 
+
+
+
+
         <div className="upload-container">
         <h4 className="form-text">Click here to Upload Images</h4>
-
-    
-        {/* <label htmlFor="file-upload" className="upload-button">
-        Upload Images
-        </label> */}
 
         <button className="upload-button">
           <label htmlFor="file-upload">
@@ -304,7 +325,8 @@ useEffect(() => {
           <input id="file-upload" type="file" multiple onChange={handleFileChange} style={{ display: 'none' }} />
             {/* Render selected files */}
             <div className="uploaded-files">
-              {selectedFiles.map((file, index) => (
+              {selectedFiles && 
+              selectedFiles.map((file, index) => (
                 <div key={index} className="uploaded-file">
                   <img src={URL.createObjectURL(file)} alt={file.name} className="thumbnail" />
                   <span>{file.name}</span>
