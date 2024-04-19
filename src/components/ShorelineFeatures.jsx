@@ -33,9 +33,9 @@ const recreactionalOptions = [
   { label: "Outfall (P)", value: "outfallP" },
 ];
 
-const otherOptions = [
+const othersOptions = [
     { label: "Outfall (P)", value: "outfallP" },
-]
+];
 
 const ShorelineFeaturesForm = (props) => {
   const [erosionStructers, setSelectedErosionControlOptions] = useState([]);
@@ -218,7 +218,7 @@ const handleContinueClick = () => {
        <h4>{Data.ShoreLineFeaturesData.other.lable_heading}</h4>
        {/* <pre>{JSON.stringify(otherOptions)}</pre> */}
        <MultiSelect
-        options={otherOptions}
+        options={othersOptions}
         value={otherOptions}
         onChange={handleCheckboxChange2}
         labelledBy="Select Other"

@@ -4,6 +4,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import favicon from '../images/favicon.ico';
+import Images from '../images/hero.jpeg';
+
 
 
 
@@ -66,8 +69,11 @@ function Login({setFormComponent}) {
 };
 
   return (
+     
+    <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%' }}>
+      
     <div className="login-container">
-        <img src={"favicon.ico"} alt="Logo" />
+        <img src={favicon} alt="Logo" />
       <form onSubmit={handleSubmit}>
       
         <div>  
@@ -109,6 +115,7 @@ function Login({setFormComponent}) {
       </form>
       <ToastContainer />
     </div>
+     </div>
   );
 }
 
