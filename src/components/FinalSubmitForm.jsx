@@ -279,12 +279,7 @@ useEffect(() => {
             Longitude: {location.longitude}
         </label>
         </div>}
-        <h4 className="form-text">Click here to Process Data Files</h4>
-        <div>
-            <button type="button" className="form-button">
-            Process Data Forms
-            </button>
-        </div>
+
         <div className="upload-container">
         <h4 className="form-text">Click here to Upload Images</h4>
 
