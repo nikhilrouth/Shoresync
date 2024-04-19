@@ -38,9 +38,9 @@ const otherOptions = [
 ]
 
 const ShorelineFeaturesForm = (props) => {
-  const [selectedErosionControlOptions, setSelectedErosionControlOptions] = useState([]);
-  const [selectedRecreactionalOptions, setSelectedRecreactionalOptions] = useState([]);
-  const [selectedOtherOptions, setSelectedOtherOptions] = useState([]);
+  const [erosionStructers, setSelectedErosionControlOptions] = useState([]);
+  const [recreationalStructures, setSelectedRecreactionalOptions] = useState([]);
+  const [otherOptions, setSelectedOtherOptions] = useState([]);
 
 
   const handleCheckboxChange = (name) => {
@@ -64,12 +64,12 @@ const handleContinueClick = () => {
     const validations = [
       {
         id: 'erosionControlError',
-        condition: selectedErosionControlOptions.length === 0,
+        condition: erosionStructers.length === 0,
         message: 'Please select at least one Erosion Control Structure.'
       },
       {
         id: 'recreationalError',
-        condition: selectedRecreactionalOptions.length === 0,
+        condition: recreationalStructures.length === 0,
         message: 'Please select at least one Recreational Structure.'
       }
     ];
@@ -82,14 +82,14 @@ const handleContinueClick = () => {
   
     // If no errors, proceed with logic
     if (!validations.some(validation => validation.condition)) {
-      console.log('Selected Erosion Control Structures:', selectedErosionControlOptions);
-      sessionStorage.setItem('erosionStructers', JSON.stringify(selectedErosionControlOptions));
+      console.log('Selected Erosion Control Structures:', erosionStructers);
+      sessionStorage.setItem('erosionStructers', JSON.stringify(erosionStructers));
 
-      console.log('Selected Recreational Structures:', selectedRecreactionalOptions);
-      sessionStorage.setItem('recreationalStructures', JSON.stringify(selectedRecreactionalOptions));
+      console.log('Selected Recreational Structures:', recreationalStructures);
+      sessionStorage.setItem('recreationalStructures', JSON.stringify(recreationalStructures));
 
-      console.log('Selected other:', selectedOtherOptions);
-      sessionStorage.setItem('otherOptions', JSON.stringify(selectedOtherOptions));
+      console.log('Selected other:', otherOptions);
+      sessionStorage.setItem('otherOptions', JSON.stringify(otherOptions));
 
       
       // Use a callback function in setAllFormsData to log the updated value
@@ -114,7 +114,7 @@ const handleContinueClick = () => {
         const FinalSubmitForm = {longitude, latitude, image};
 
         const previousData = { landUse, BankAttributesData, FinalSubmitForm};
-        const updatedDatas = { ...previousData, ShorelineFeaturesData: {selectedErosionControlOptions, selectedRecreactionalOptions, selectedOtherOptions}};
+        const updatedDatas = { ...previousData, ShoreLineFeaturesData: {erosionStructers, recreationalStructures, otherOptions}};
 
 
         sessionStorage.setItem('allFormsData', JSON.stringify(updatedDatas));
@@ -193,10 +193,10 @@ const handleContinueClick = () => {
         <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
       </h4>
-      {/* <pre>{JSON.stringify(selectedErosionControlOptions)}</pre> */}
+      {/* <pre>{JSON.stringify(erosionStructers)}</pre> */}
       <MultiSelect
         options={erosionControlOptions}
-        value={selectedErosionControlOptions}
+        value={erosionStructers}
         onChange={handleCheckboxChange}
         labelledBy="Select Erosion Control Structures"
       />
@@ -207,19 +207,19 @@ const handleContinueClick = () => {
         <span className="material-symbols-outlined small-info-icon" >info</span>
       </Tooltip>
       </h4>
-      {/* <pre>{JSON.stringify(selectedRecreactionalOptions)}</pre> */}
+      {/* <pre>{JSON.stringify(recreationalStructures)}</pre> */}
       <MultiSelect
         options={recreactionalOptions}
-        value={selectedRecreactionalOptions}
+        value={recreationalStructures}
         onChange={handleCheckboxChange1}
         labelledBy="Select Recreactional Structures"
       />
 
        <h4>{Data.ShoreLineFeaturesData.other.lable_heading}</h4>
-       {/* <pre>{JSON.stringify(selectedOtherOptions)}</pre> */}
+       {/* <pre>{JSON.stringify(otherOptions)}</pre> */}
        <MultiSelect
         options={otherOptions}
-        value={selectedOtherOptions}
+        value={otherOptions}
         onChange={handleCheckboxChange2}
         labelledBy="Select Other"
         

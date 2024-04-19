@@ -82,15 +82,19 @@ const FinalSubmitForm = (props) => {
     }
 
     const sendFormData = () => {
+        console.log("hello came here");
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(props.allFormsData),
         };
+
+
+        console.log("bob");
         fetch("http://localhost:5001/api/addFormData",  requestOptions)
-            .then(response => {
-                return response.json()
-            })
+            .then(response => 
+                 response.json())
+            .then (console.log)
             .then(data => {
                 console.log("data",data)
 
