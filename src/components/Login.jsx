@@ -3,10 +3,13 @@ import './Login.css'; // Import the CSS file
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Login({setFormComponent}) {
+
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,7 +21,8 @@ function Login({setFormComponent}) {
     setPassword(e.target.value);
   };
   const handleCreateAccountClick = () => {
-    setFormComponent(1); // Update this to the index for the CreateAccount component
+    // setFormComponent(1); // Update this to the index for the CreateAccount component
+    navigate ('/CreateAccount');
   };
 
   // const handleSubmit = async (e) => {

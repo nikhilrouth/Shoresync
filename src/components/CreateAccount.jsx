@@ -4,9 +4,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 function CreateAccount(setFormComponent) {
+
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -57,7 +60,9 @@ function CreateAccount(setFormComponent) {
         setEmail('');
         setPassword('');
         setConfirmPassword('');
-        setFormComponent(0); // Redirect to login page
+        // setFormComponent(0); // Redirect to login page
+        navigate('/Login');
+
       } else {
         toast.error(response.data.message || "An error occurred during registration.");
       }
