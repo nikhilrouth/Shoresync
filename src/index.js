@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Login from "./components/Login";
+import CreateAccount from './components/CreateAccount';
 import App from './App';
 
 
@@ -8,7 +9,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import CreateAccount from './components/CreateAccount';
 
 const router = createBrowserRouter([
   {
