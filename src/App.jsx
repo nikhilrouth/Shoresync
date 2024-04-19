@@ -75,13 +75,13 @@ function App() {
         <>
         {/* {!loggedIn && <Login setFormComponent={setFormComponent} />} */}
             <Header setFormComponent={setFormComponent}/>
-            {/* {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+            {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-            {formComponent === 4 && <ThanksPage setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />} */}
+            {formComponent === 4 && <ThanksPage setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
             
-            <Header onLogout={handleLogout} />
+            {/* <Header onLogout={handleLogout} /> */}
             {/* {!loggedIn ? (
               <>
                 {formComponent === 0 && <Login onLogin={handleLogin} />}
