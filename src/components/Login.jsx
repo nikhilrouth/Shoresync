@@ -25,57 +25,41 @@ function Login({setFormComponent}) {
     navigate ('/CreateAccount');
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   if (username === dummyEmail && password === dummyPassword) {
-  //       // Authentication successful
-  //       console.log('Login successful!');
-  //       // Here you can perform validation, authentication, etc.
-  //       console.log('Username:', username);
-  //       console.log('Password:', password);
-  //       // Reset form fields after successful login
-  //       setUsername('');
-  //       setPassword('');
-  //       toast.success("Login Successful!");
-
-  //     } else {
-  //       // Authentication failed
-  //       console.log('Invalid email or password. Please try again.');
-  //       // Clear password field after unsuccessful login attempt
-  //       setPassword('');
-        
-  //       toast.error("Invalid email or password. Please try again.");
-  //     }
-    
-
 
   //  // Dummy email and password for testing
   //  const dummyEmail = 'test@example.com';
   //  const dummyPassword = '@Test123456';
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:5001/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: username, password: password })
-      });
-      const data = await response.json();
-      if (response.ok) {
-        toast.success(data.message);
-        sessionStorage.setItem('authToken', data.token); // Save token to session storage
+    //  uncomment here!!!!
+    // e.preventDefault();
+    // try {
+    //   const response = await fetch('http://localhost:5001/api/login', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ email: username, password: password })
+    //   });
+    //   const data = await response.json();
+
+     
+    //   if (response.ok) {
+    //     toast.success(data.message);
+    //     sessionStorage.setItem('authToken', data.token); // Save token to session storage
         // Redirect to LandUseForm or whatever the first form component is
-        setFormComponent(2); // Assuming 2 is the index for LandUseForm
-      } else {
-        toast.error(data.message);
-        setPassword(''); // Clear password field
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      toast.error("Login failed. Please try again.");
-  }
+
+
+        // setFormComponent(2); // Assuming 2 is the index for LandUseForm
+        navigate('/');
+
+
+  //     } else {
+  //       toast.error(data.message);
+  //       setPassword(''); // Clear password field
+  //     }
+  //   } catch (error) {
+  //     console.error('Login error:', error);
+  //     toast.error("Login failed. Please try again.");
+  // }
 
   
 
