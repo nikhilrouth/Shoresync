@@ -1,6 +1,9 @@
 import React from 'react';
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
+import { FaHome, FaSignOutAlt } from 'react-icons/fa'; 
+import favicon from '../images/favicon.ico';
+
 
 const Header = () => {
   const navigate = useNavigate();
@@ -19,28 +22,20 @@ const Header = () => {
   };
 
   return (
-    <div>
     <div className="header">
-      <div className = "header-content">
-      <h1 className= "welcome">Welcome to ShoreSync</h1>
-      
-      </div>
+      <img className="img" src={favicon} alt="Favicon" /> {/* Favicon */}
+      <h1 className="welcome">Shoresync</h1>
 
-      <div className = "header-link-content">
-      <a className = "link" href="/"
-      onClick = {redirectPage}> 
-      Home
-      </a>
-      <a className = "link" href="/Login"
-      onClick = {handleLogout}> 
-      Logout
-      </a>
+      <div className="header-link-content">
+        <a className="link" href="/" onClick={redirectPage}>
+          <FaHome /> Home
+        </a>
+        <a className="link" href="/Login" onClick={handleLogout}>
+          <FaSignOutAlt /> Logout
+        </a>
       </div>
-      
-               
     </div>
-    </div>
-      );
-};
+  );
+}
 
 export default Header;

@@ -44,12 +44,14 @@
     border-color: #ADD8E6; 
     width: 100px ;
     cursor: pointer ;
+    transition: transform 0.4s ease;
     
   }
 
   .account-container button:hover {
     background-color: white;
     color: black;
+    transform: scale(1.06);
   }
 
   .account-container input {

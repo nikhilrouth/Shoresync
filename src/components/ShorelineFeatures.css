@@ -27,11 +27,14 @@
     border-color: #ADD8E6;
     width: 150px;
     cursor: pointer;
+    transition: transform 0.4s ease;
+
   }
   
   .form-button:hover {
     background-color: white;
     color: black;
+    transform: scale(1.06);
   }
   /* Add any additional styles for the form container, header, and button as needed */
   
