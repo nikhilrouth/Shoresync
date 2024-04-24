@@ -6,47 +6,47 @@ import 'react-toastify/dist/ReactToastify.css';
 import imageCompression from 'browser-image-compression';
 
 const FinalSubmitForm = (props) => {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [location, setLocation] = useState(null);
-  const [compressedFile, setCompressedFile] = useState(null);
-  const [uniqueNumber, setUniqueNumber] = useState(0);
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [location, setLocation] = useState(null);
+    const [compressedFile, setCompressedFile] = useState(null);
+    const [uniqueNumber, setUniqueNumber] = useState(0);
 
-  const handleFileChange = (event) => {
+    const handleFileChange = (event) => {
 
-    //Sets the original image
-    const files = Array.from(event.target.files);
-    setSelectedFiles(files.filter(file => file.type === 'image/jpeg' || file.type === 'image/png'));
+        //Sets the original image
+        const files = Array.from(event.target.files);
+        setSelectedFiles(files.filter(file => file.type === 'image/jpeg' || file.type === 'image/png'));
 
-    // Original images size
-    files.map((file, index) => (
-      console.log("Image Size: ", file.size/1024)
-      )
-    );
+        // Original images size
+        files.map((file, index) => (
+                console.log("Image Size: ", file.size/1024)
+            )
+        );
 
-    //Compresses the images received and saves it to session storage
-    files.map((image, index) => (
-    new Compressor(image, {
-      quality: 0.8,
-      success: (compressedResult) => {
-        setCompressedFile(compressedResult)
-        console.log('compression size: ', compressedResult.size/1024);
-        console.log('compression result: ', compressedResult);
-        //use session storage to receive already existing 
-        const alreadyExistingImages = sessionStorage.getItem('compressedImage');
+        //Compresses the images received and saves it to session storage
+        files.map((image, index) => (
+            new Compressor(image, {
+                quality: 0.8,
+                success: (compressedResult) => {
+                    setCompressedFile(compressedResult)
+                    console.log('compression size: ', compressedResult.size/1024);
+                    console.log('compression result: ', compressedResult);
+                    //use session storage to receive already existing
+                    const alreadyExistingImages = sessionStorage.getItem('compressedImage');
 
-        if(alreadyExistingImages != null){
-          const compressedImages = [alreadyExistingImages, compressedResult];
-          sessionStorage.setItem('compressedImage', compressedImages);
-        } else {
-          sessionStorage.setItem('compressedImage', compressedResult);
-        }
-        
-      },
-    }) 
-    ));
+                    if(alreadyExistingImages != null){
+                        const compressedImages = [alreadyExistingImages, compressedResult];
+                        sessionStorage.setItem('compressedImage', compressedImages);
+                    } else {
+                        sessionStorage.setItem('compressedImage', compressedResult);
+                    }
 
-    
-  }
+                },
+            })
+        ));
+
+
+    }
 
     function handleLocationClick() {
         if (navigator.geolocation) {
@@ -65,14 +65,14 @@ const FinalSubmitForm = (props) => {
 
         sessionStorage.setItem('longitude', longitude);
         sessionStorage.setItem('latitude', latitude);
-    } 
+    }
 
 
     let unumber = 0;
     const generateUniqueNumber=async()=>   {
-        var sixDigitNumber = Math.floor(Math.random() * 1000000);
-        setUniqueNumber(sixDigitNumber);
-        console.log("unique number generated::", uniqueNumber)
+        unumber = Math.floor(Math.random() * 1000000);
+        //setUniqueNumber(sixDigitNumber);
+        console.log("unique number generated::", unumber)
 
     }
 
@@ -92,8 +92,8 @@ const FinalSubmitForm = (props) => {
 
         console.log("bob");
         fetch("http://localhost:5001/api/addFormData",  requestOptions)
-            .then(response => 
-                 response.json())
+            .then(response =>
+                response.json())
             .then (console.log)
             .then(data => {
                 console.log("data",data)
@@ -139,8 +139,8 @@ const FinalSubmitForm = (props) => {
 
         var files = sessionStorage.getItem('compressedImage');
         const formData = new FormData();
-        console.log("uniqueNumber",uniqueNumber);
-        formData.append("txid",uniqueNumber);
+        console.log("uniqueNumber",unumber);
+        formData.append("txid",unumber);
         for (let i = 0; i < selectedFiles.length; i++) {
             const compressedFile = await imageCompression(selectedFiles[i], options);
             formData.append('image', compressedFile);
@@ -163,203 +163,203 @@ const FinalSubmitForm = (props) => {
         }
     }
 
-const handleSubmitClick = async() => {
+    const handleSubmitClick = async() => {
 
-      if(!sessionStorage.getItem('latitude')){
-          toast.error("Synchronize GPS Coordinates",{toastId: "locationError"});
-      }if(!sessionStorage.getItem('compressedImage')){
-        toast.error("Upload an image",{toastId: "imageError"});
-      }else {
+        if(!sessionStorage.getItem('latitude')){
+            toast.error("Synchronize GPS Coordinates",{toastId: "locationError"});
+        }if(!sessionStorage.getItem('compressedImage')){
+            toast.error("Upload an image",{toastId: "imageError"});
+        }else {
 
-          var sixDigitNumber = Math.floor(Math.random() * 1000000);
-          setUniqueNumber(sixDigitNumber);
-          //page one
-          const landUse = JSON.parse(sessionStorage.getItem('landUse'));
+            var sixDigitNumber = Math.floor(Math.random() * 1000000);
+            setUniqueNumber(sixDigitNumber);
+            //page one
+            const landUse = JSON.parse(sessionStorage.getItem('landUse'));
 
-          //page two
-          const heightItem = (sessionStorage.getItem('heightItem'));
-          const bankStability = (sessionStorage.getItem('bankStability'));
-          const bankCover = (sessionStorage.getItem('bankCover'));
-          const marshBuffer = (sessionStorage.getItem('marshBuffer'));
-          const bankBuffer = (sessionStorage.getItem('bankBuffer'));
-          const phragmitesAustralis = (sessionStorage.getItem('phragmitesAustralis'));
-          const BankAttributesData = {
-              heightItem,
-              bankStability,
-              bankCover,
-              marshBuffer,
-              bankBuffer,
-              phragmitesAustralis
-          }
-
-
-          //page 3
-          const erosionStructers = JSON.parse(sessionStorage.getItem('erosionStructers'));
-          const recreationalStructures = JSON.parse(sessionStorage.getItem('recreationalStructures'));
-          const otherOptions = JSON.parse(sessionStorage.getItem('otherOptions'));
-          const ShoreLineFeaturesData = {erosionStructers, recreationalStructures, otherOptions}
+            //page two
+            const heightItem = (sessionStorage.getItem('heightItem'));
+            const bankStability = (sessionStorage.getItem('bankStability'));
+            const bankCover = (sessionStorage.getItem('bankCover'));
+            const marshBuffer = (sessionStorage.getItem('marshBuffer'));
+            const bankBuffer = (sessionStorage.getItem('bankBuffer'));
+            const phragmitesAustralis = (sessionStorage.getItem('phragmitesAustralis'));
+            const BankAttributesData = {
+                heightItem,
+                bankStability,
+                bankCover,
+                marshBuffer,
+                bankBuffer,
+                phragmitesAustralis
+            }
 
 
-          //page 4- current page
-          const longitude = sessionStorage.getItem('longitude');
-          const latitude = sessionStorage.getItem('latitude');
-          const compressedImage = sessionStorage.getItem('compressedImage');
-
-          const isAtLeastOneChecked = Object.values(landUse).some(value => value === true);
-
-
-          //validation of every page
-          if (isAtLeastOneChecked) {
-
-              if (heightItem !== null && bankStability !== null && bankCover !== null && marshBuffer !== null && bankBuffer !== null && phragmitesAustralis !== null) {
-                  if (erosionStructers != null && recreationalStructures != null) {
-                      if (longitude != null && latitude != null && compressedImage != null) {
+            //page 3
+            const erosionStructers = JSON.parse(sessionStorage.getItem('erosionStructers'));
+            const recreationalStructures = JSON.parse(sessionStorage.getItem('recreationalStructures'));
+            const otherOptions = JSON.parse(sessionStorage.getItem('otherOptions'));
+            const ShoreLineFeaturesData = {erosionStructers, recreationalStructures, otherOptions}
 
 
-                          props.setAllFormsData(prevData => {
+            //page 4- current page
+            const longitude = sessionStorage.getItem('longitude');
+            const latitude = sessionStorage.getItem('latitude');
+            const compressedImage = sessionStorage.getItem('compressedImage');
 
-                              const previousData = {landUse, BankAttributesData, ShoreLineFeaturesData}
-                              const updatedData = {
-                                  ...previousData,
-                                  FinalSubmitForm: {longitude: sessionStorage.getItem('longitude'), latitude: sessionStorage.getItem('latitude'), image: sessionStorage.getItem('compressedImage'), txnid:sixDigitNumber}
-                              };
-
+            const isAtLeastOneChecked = Object.values(landUse).some(value => value === true);
 
 
-                              sessionStorage.setItem('allFormsData', JSON.stringify(updatedData));
-                              console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
-                              console.log("prop data", props.allFormsData);
-                              return updatedData;
-                          });
+            //validation of every page
+            if (isAtLeastOneChecked) {
 
-                        //   console.log(props.allFormsData);
-
-                          sendFormData()
-                          sendImages()
-                          
-
-                      }
-                  }
-              }
-          }
-          
-
-          toast.dismiss('locationError');
-          props.setFormComponent(4);  
-        
-       
-      }
-
-};
-
-const handleReset = () => {
-    sessionStorage.removeItem('longitude');
-    sessionStorage.removeItem('latitude');
-    sessionStorage.removeItem('compressedImage');
-    setLocation(null);
-    setSelectedFiles(null);
-    setCompressedFile(null)
-
-};
-
-const handlePrevious = () => {
-  props.setFormComponent(2);
-  sessionStorage.setItem('formComponent', 4);
-}
+                if (heightItem !== null && bankStability !== null && bankCover !== null && marshBuffer !== null && bankBuffer !== null && phragmitesAustralis !== null) {
+                    if (erosionStructers != null && recreationalStructures != null) {
+                        if (longitude != null && latitude != null && compressedImage != null) {
 
 
-useEffect(() => {
+                            props.setAllFormsData(prevData => {
 
-  console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
-  console.log("latty", sessionStorage.getItem('latitude'));
+                                const previousData = {landUse, BankAttributesData, ShoreLineFeaturesData}
+                                const updatedData = {
+                                    ...previousData,
+                                    FinalSubmitForm: {longitude: sessionStorage.getItem('longitude'), latitude: sessionStorage.getItem('latitude'), image: sessionStorage.getItem('compressedImage'), txnid:unumber}
+                                };
+
+
+
+                                sessionStorage.setItem('allFormsData', JSON.stringify(updatedData));
+                                console.log("All Forms Data: ", JSON.parse(sessionStorage.getItem('allFormsData')));
+                                console.log("prop data", props.allFormsData);
+                                return updatedData;
+                            });
+
+                            //   console.log(props.allFormsData);
+
+                            sendFormData()
+                            sendImages()
+
+
+                        }
+                    }
+                }
+            }
+
+
+            toast.dismiss('locationError');
+            props.setFormComponent(4);
+
+
+        }
+
+    };
+
+    const handleReset = () => {
+        sessionStorage.removeItem('longitude');
+        sessionStorage.removeItem('latitude');
+        sessionStorage.removeItem('compressedImage');
+        setLocation(null);
+        setSelectedFiles(null);
+        setCompressedFile(null)
+
+    };
+
+    const handlePrevious = () => {
+        props.setFormComponent(2);
+        sessionStorage.setItem('formComponent', 4);
+    }
+
+
+    useEffect(() => {
+
+        console.log("This is upon starting of the page ", JSON.parse(sessionStorage.getItem('allFormsData')));
+        console.log("latty", sessionStorage.getItem('latitude'));
 //   console.log("Page location", location.latitude);
 
-  const existingImages = sessionStorage.getItem('compressedImage');
-  console.log("heij", existingImages);
+        const existingImages = sessionStorage.getItem('compressedImage');
+        console.log("heij", existingImages);
+
+        generateUniqueNumber()
+
+        sessionStorage.setItem('formComponent', 3);
+
+    });
+
+
+    return (
+        <div className="form-container">
+            <h2 className="form-header">Upload Location and Images</h2>
+
+            <h4 className="form-text">Click here to Synchronize GPS location</h4>
+            <button type="button" className="form-button" onClick={handleLocationClick}>
+                Synchronize GPS
+            </button>
+            {sessionStorage.getItem('latitude') &&
+                <div>
+
+
+                    <label htmlFor="Latitude" >
+                        Latitude: {sessionStorage.getItem('latitude')} &nbsp; &nbsp;
+                    </label>
+
+
+                    <label htmlFor="Longitude" >
+                        Longitude: {sessionStorage.getItem('longitude')}
+                    </label>
+                </div>}
 
 
 
-  sessionStorage.setItem('formComponent', 3);
-
-});
 
 
-  return (
-    <div className="form-container">
-        <h2 className="form-header">Upload Location and Images</h2>
+            <div className="upload-container">
+                <h4 className="form-text">Click here to Upload Images</h4>
 
-        <h4 className="form-text">Click here to Synchronize GPS location</h4>
-        <button type="button" className="form-button" onClick={handleLocationClick}>
-        Synchronize GPS
-        </button>
-        {sessionStorage.getItem('latitude') &&
-        <div>
-
-
-        <label htmlFor="Latitude" >
-            Latitude: {sessionStorage.getItem('latitude')} &nbsp; &nbsp;
-        </label>
+                <button className="upload-button">
+                    <label htmlFor="file-upload">
+                        Upload Images
+                        <input id="file-upload" type="file" multiple onChange={handleFileChange} style={{ display: 'none' }} />
+                    </label>
+                </button>
 
 
-        <label htmlFor="Longitude" >
-            Longitude: {sessionStorage.getItem('longitude')}
-        </label>
-        </div>}
+                {/* Input element for file upload */}
+                <input id="file-upload" type="file" multiple onChange={handleFileChange} style={{ display: 'none' }} />
+                {/* Render selected files */}
+                <div className="uploaded-files">
+                    {selectedFiles &&
+                        selectedFiles.map((file, index) => (
+                            <div key={index} className="uploaded-file">
+                                <img src={URL.createObjectURL(file)} alt={file.name} className="thumbnail" />
+                                <span>{file.name}</span>
 
-
-
-
-
-        <div className="upload-container">
-        <h4 className="form-text">Click here to Upload Images</h4>
-
-        <button className="upload-button">
-          <label htmlFor="file-upload">
-            Upload Images
-            <input id="file-upload" type="file" multiple onChange={handleFileChange} style={{ display: 'none' }} />
-          </label>
-        </button>
-        
-        
-          {/* Input element for file upload */}
-          <input id="file-upload" type="file" multiple onChange={handleFileChange} style={{ display: 'none' }} />
-            {/* Render selected files */}
-            <div className="uploaded-files">
-              {selectedFiles && 
-              selectedFiles.map((file, index) => (
-                <div key={index} className="uploaded-file">
-                  <img src={URL.createObjectURL(file)} alt={file.name} className="thumbnail" />
-                  <span>{file.name}</span>
-
+                            </div>
+                        ))}
                 </div>
-              ))}
+
             </div>
+            <div>
+                {/* <button type="button" className="form-button2"> */}
 
-        </div>
-        <div>
-            {/* <button type="button" className="form-button2"> */}
-
-            {/* <button type="button" className="form-button2">
+                {/* <button type="button" className="form-button2">
             Submit Final Data
             </button> */}
-            <button type="reset" onClick={handlePrevious} className="form-button">Previous</button>
-            &nbsp;
-            &nbsp;
-            <button type="reset" onClick={handleReset} className="form-button">Reset</button>
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            <button type="button"  onClick={handleSubmitClick} className="form-button2">
-            Submit Final Data
-            </button>
-            
-            
-        </div>
-        
+                <button type="reset" onClick={handlePrevious} className="form-button">Previous</button>
+                &nbsp;
+                &nbsp;
+                <button type="reset" onClick={handleReset} className="form-button">Reset</button>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <button type="button"  onClick={handleSubmitClick} className="form-button2">
+                    Submit Final Data
+                </button>
 
-    </div>
-  );
+
+            </div>
+
+
+        </div>
+    );
 };
 
 export default FinalSubmitForm

@@ -47,12 +47,12 @@ function App() {
 
   useEffect(() => {
     console.log("Current form component:", formComponent);
-}, [formComponent]);
+  }, [formComponent]);
 
 
 
   const handleLogin = () => {
-    
+
     sessionStorage.setItem('loggedIn', 'true');
     setLoggedIn(true);
     setFormComponent(0);
@@ -65,24 +65,24 @@ function App() {
     toast.info("You have been logged out.");
   };
 
-  
+
 
   return (
-    <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%', height: formComponent !== 1 ? '100vh' : undefined  }}>
-      
-      <br/>
+      <div className='page' style={{backgroundImage: `url(${Images})`, backgroundSize: '100% 100%', height: formComponent !== 1 ? '100vh' : undefined  }}>
+
+        <br/>
 
         <>
-        {/* {!loggedIn && <Login setFormComponent={setFormComponent} />} */}
-            <Header setFormComponent={setFormComponent}/>
-            {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-            {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-            {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-            {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-            {formComponent === 4 && <ThanksPage setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
-            
-            {/* <Header onLogout={handleLogout} /> */}
-            {/* {!loggedIn ? (
+          {/* {!loggedIn && <Login setFormComponent={setFormComponent} />} */}
+          <Header setFormComponent={setFormComponent}/>
+          {formComponent === 0 && <LandUseForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 1 && <BankAttributesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 2 && <ShorelineFeaturesForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 3 && <FinalSubmitForm setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+          {formComponent === 4 && <ThanksPage setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
+
+          {/* <Header onLogout={handleLogout} /> */}
+          {/* {!loggedIn ? (
               <>
                 {formComponent === 0 && <Login onLogin={handleLogin} />}
                 {formComponent === 1 && <CreateAccount />}
@@ -96,19 +96,17 @@ function App() {
                 {formComponent === 6 && <ThanksPage setFormComponent={setFormComponent} allFormsData={allFormsData} setAllFormsData={setAllFormsData} />}
               </>
             )} */}
-            
-            
-            <ToastContainer />
-            <br/>
-            <Footer />
+
+
+          <ToastContainer />
+          <br/>
+          <Footer />
         </>
 
-    </div>
+      </div>
   );
 }
 
 
 
 export default App;
-
-
